@@ -36,6 +36,11 @@ const btn0 = document.querySelector(".btn-0");
 const btnDecimal = document.querySelector(".btn-decimal");
 const btnEquals = document.querySelector(".btn-equals");
 
+let btnCalc = document.querySelectorAll(".btn-calc");
+
+const calculation = [];
+let numberClick;
+
 const chooseDarkLightMode = function () {
   darkLightModeBtn.addEventListener("click", (e) => {
     if (e.target.matches(".light-mode")) {
@@ -52,4 +57,92 @@ const chooseDarkLightMode = function () {
   });
 };
 
+const numericalClick = function () {
+  for (let i = 0; i < btnCalc.length; i++) {
+    btnCalc[i].addEventListener("click", (e) => {
+      if (e.target.matches(".btn-calc")) {
+        console.log(`numericalClick(): ${e.target.classList[2]}`);
+        numberClick = e.target.classList[2];
+      }
+    });
+  }
+};
+
+const showOnScreen = function () {
+  numericalClick();
+  for (let i = 0; i < btnCalc.length; i++) {
+    btnCalc[i].addEventListener("click", () => {
+      console.log(`showOnScreen(): ${numberClick}`);
+      if (numberClick === "btn-0") {
+        calculation.push(0);
+        console.log(calculation);
+      } else if (numberClick === "btn-1") {
+        calculation.push(1);
+        console.log(calculation);
+      } else if (numberClick === "btn-2") {
+        calculation.push(2);
+        console.log(calculation);
+      } else if (numberClick === "btn-3") {
+        calculation.push(3);
+        console.log(calculation);
+      } else if (numberClick === "btn-4") {
+        calculation.push(4);
+        console.log(calculation);
+      } else if (numberClick === "btn-5") {
+        calculation.push(5);
+        console.log(calculation);
+      } else if (numberClick === "btn-6") {
+        calculation.push(6);
+        console.log(calculation);
+      } else if (numberClick === "btn-7") {
+        calculation.push(7);
+        console.log(calculation);
+      } else if (numberClick === "btn-8") {
+        calculation.push(8);
+        console.log(calculation);
+      } else if (numberClick === "btn-9") {
+        calculation.push(9);
+        console.log(calculation);
+      } else if (numberClick === "btn-decimal") {
+        calculation.push(".");
+        console.log(calculation);
+      } else if (numberClick === "btn-add") {
+        calculation.push("+");
+        console.log(calculation);
+      } else if (numberClick === "btn-subtract") {
+        calculation.push("-");
+        console.log(calculation);
+      } else if (numberClick === "btn-multiply") {
+        calculation.push("x");
+        console.log(calculation);
+      } else if (numberClick === "btn-divide") {
+        calculation.push("/");
+        console.log(calculation);
+      } else if (numberClick === "btn-negative") {
+        calculation.push("-");
+        console.log(calculation);
+      } else if (numberClick === "btn-power") {
+        calculation.push("^");
+        console.log(calculation);
+      } else if (numberClick === "btn-percent") {
+        calculation.push("%");
+        console.log(calculation);
+      } else if (numberClick === "btn-left-paren") {
+        calculation.push("(");
+        console.log(calculation);
+      } else if (numberClick === "btn-right-paren") {
+        calculation.push(")");
+        console.log(calculation);
+      } else if (numberClick === "btn-back") {
+        calculation.pop();
+        console.log(calculation);
+      } else if (numberClick === "btn-clear") {
+        calculation.length = 0;
+        console.log(calculation);
+      }
+    });
+  }
+};
+
 chooseDarkLightMode();
+showOnScreen();

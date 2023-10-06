@@ -1,3 +1,15 @@
+/* 
+Light Color: #f8f9fa
+Dark Color: #495057
+
+Calc Light: #e7f5ff
+Calc Dark: #1c7ed6
+
+Btn Border: #495057
+
+
+*/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,6 +17,7 @@
 }
 
 .body-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,15 +26,19 @@
 }
 
 .header {
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .header-h1 {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
 }
 
 .main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
   border-radius: 10px;
   padding: 20px;
@@ -51,8 +68,75 @@
   width: 70px;
   height: 40px;
   margin: 5px auto;
+  border: 1px solid #495057;
   border-radius: 10px;
   font-family: inherit;
   font-size: 16px;
   font-weight: 500;
+}
+
+.btn:hover {
+  border: 2px solid #1c7ed6;
+}
+
+.btn:active {
+  background-color: #d6336c;
+  border: 2px solid white;
+  color: white;
+  transition: 0.2s;
+}
+
+.footer {
+  margin: auto;
+  font-size: 16px;
+}
+
+.background-dark {
+  background-color: #1c7ed6;
+  color: #e7f5ff;
+}
+
+.background-light {
+  background-color: #e7f5ff;
+  color: #1c7ed6;
+}
+
+.body-background-dark {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+.body-background-light {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.eval-dark {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+.eval-light {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.btn-dark {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.dark-mode {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+.light-mode {
+  background-color: #f8f9fa;
+  color: #495057;
 }

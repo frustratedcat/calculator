@@ -40,6 +40,7 @@ let btnCalc = document.querySelectorAll(".btn-calc");
 
 const calculation = [];
 let numberClick;
+const parenthesisCheckArray = [];
 
 const showEval = document.querySelector(".show-eval");
 
@@ -77,87 +78,87 @@ const showOnScreen = function () {
       console.log(`showOnScreen(): ${numberClick}`);
       if (numberClick === "btn-0") {
         calculation.push(0);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-1") {
         calculation.push(1);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-2") {
         calculation.push(2);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-3") {
         calculation.push(3);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-4") {
         calculation.push(4);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-5") {
         calculation.push(5);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-6") {
         calculation.push(6);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-7") {
         calculation.push(7);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-8") {
         calculation.push(8);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-9") {
         calculation.push(9);
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-decimal") {
         calculation.push(".");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-add") {
         calculation.push("+");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-subtract") {
         calculation.push("-");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-multiply") {
         calculation.push("x");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-divide") {
         calculation.push("/");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-negative") {
         calculation.push("-");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-power") {
         calculation.push("^");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-percent") {
         calculation.push("%");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-left-paren") {
         calculation.push("(");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-right-paren") {
         calculation.push(")");
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-back") {
         calculation.pop();
-        showEval.textContent = calculation.join(" ");
+        showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-clear") {
         calculation.length = 0;
@@ -168,5 +169,25 @@ const showOnScreen = function () {
   }
 };
 
+const calculateEval = function () {
+  showOnScreen();
+  for (let i = 0; i < btnCalc.length; i++) {
+    btnCalc[i].addEventListener("click", (e) => {
+      if (e.target.matches(".btn-calc")) {
+        if (e.target.matches(".btn-equals")) {
+          console.log(`equals check: ${calculation.join("")}`);
+          for (let i = 0; i < calculation.length; i++) {
+            console.log(`equals check 2: ${calculation[i]}`);
+            parenthesisCheck();
+          }
+          calculation.length = 0;
+        }
+      }
+    });
+  }
+};
+
+function parenthesisCheck() {}
+
 chooseDarkLightMode();
-showOnScreen();
+calculateEval();

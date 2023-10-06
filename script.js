@@ -42,6 +42,7 @@ const chooseDarkLightMode = function () {
       e.target.classList.toggle("dark-mode");
       darkLightBody.classList.toggle("dark-mode-body");
       darkLightMain.classList.toggle("background-dark");
+      darkLightMain.classList.toggle("outer-dark");
       darkLightEval.classList.toggle("dark-mode");
       darkLightBtnSection.classList.toggle("background-dark");
       for (let i = 0; i < darkLightBtn.length; i++) {

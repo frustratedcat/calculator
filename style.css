@@ -3,7 +3,7 @@ Light Color: #f8f9fa
 Dark Color: #495057
 
 Calc Light: #e7f5ff
-Calc Dark: #1c7ed6
+Calc Dark: ##212529
 
 Btn Border: #495057
 
@@ -39,15 +39,12 @@ Btn Border: #495057
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid #495057;
-  border-radius: 10px;
   padding: 20px;
   width: 350px;
   margin: auto;
 }
 
 .show-evaluation-section {
-  border: 2px solid #495057;
   border-radius: 5px;
   padding: 10px;
   width: 300px;
@@ -76,7 +73,6 @@ Btn Border: #495057
   width: 70px;
   height: 40px;
   margin: 5px auto;
-
   border-radius: 10px;
   font-family: inherit;
   font-size: 16px;
@@ -99,14 +95,22 @@ Btn Border: #495057
   font-size: 16px;
 }
 
+.outer-light {
+  border: 2px solid #495057;
+  border-radius: 10px;
+}
+
+.outer-dark {
+  border: 2px solid #f8f9fa;
+  border-radius: 10px;
+}
+
 .background-light {
   background-color: #e7f5ff;
-  color: #1c7ed6;
 }
 
 .background-dark {
-  background-color: #1c7ed6;
-  color: #e7f5ff;
+  background-color: #212529;
 }
 
 .light-mode {

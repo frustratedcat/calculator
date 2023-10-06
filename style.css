@@ -39,7 +39,7 @@ Btn Border: #495057
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid #495057;
   border-radius: 10px;
   padding: 20px;
   width: 350px;
@@ -47,7 +47,7 @@ Btn Border: #495057
 }
 
 .show-evaluation-section {
-  border: 1px solid black;
+  border: 2px solid #495057;
   border-radius: 5px;
   padding: 10px;
   width: 300px;
@@ -57,7 +57,7 @@ Btn Border: #495057
   align-items: center;
 }
 
-.show-input {
+.show-eval {
   font-size: 30px;
   font-weight: 500;
 }
@@ -76,7 +76,7 @@ Btn Border: #495057
   width: 70px;
   height: 40px;
   margin: 5px auto;
-  border: 1px solid #495057;
+
   border-radius: 10px;
   font-family: inherit;
   font-size: 16px;
@@ -84,13 +84,13 @@ Btn Border: #495057
 }
 
 .btn:hover {
-  border: 2px solid #1c7ed6;
+  border: 2px solid #d6336c;
 }
 
 .btn:active {
   background-color: #d6336c;
-  border: 2px solid white;
-  color: white;
+  border: 2px solid #e7f5ff;
+  color: #e7f5ff;
   transition: 0.2s;
 }
 
@@ -99,52 +99,34 @@ Btn Border: #495057
   font-size: 16px;
 }
 
-.background-dark {
-  background-color: #1c7ed6;
-  color: #e7f5ff;
-}
-
 .background-light {
   background-color: #e7f5ff;
   color: #1c7ed6;
 }
 
-.body-background-dark {
-  background-color: #495057;
-  color: #f8f9fa;
-}
-
-.body-background-light {
-  background-color: #f8f9fa;
-  color: #495057;
-}
-
-.eval-dark {
-  background-color: #495057;
-  color: #f8f9fa;
-}
-
-.eval-light {
-  background-color: #f8f9fa;
-  color: #495057;
-}
-
-.btn-dark {
-  background-color: #495057;
-  color: #f8f9fa;
-}
-
-.btn-light {
-  background-color: #f8f9fa;
-  color: #495057;
-}
-
-.dark-mode {
-  background-color: #495057;
-  color: #f8f9fa;
+.background-dark {
+  background-color: #1c7ed6;
+  color: #e7f5ff;
 }
 
 .light-mode {
   background-color: #f8f9fa;
   color: #495057;
+  border: 2px solid #495057;
+}
+
+.dark-mode {
+  background-color: #495057;
+  color: #f8f9fa;
+  border: 2px solid #f8f9fa;
+}
+
+.light-mode-body {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.dark-mode-body {
+  background-color: #495057;
+  color: #f8f9fa;
 }

@@ -155,7 +155,7 @@ const calculateEval = function () {
         if (e.target.matches(".btn-equals")) {
           parenthesisCheck();
           squareRootCheck();
-          beforeExponentCheck();
+          exponentCheck();
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
@@ -264,6 +264,11 @@ function squareRootCheck() {
   }
 }
 
+function exponentCheck() {
+  beforeExponentCheck();
+  afterExponentCheck();
+}
+
 function beforeExponentCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "^") {
@@ -292,6 +297,38 @@ function beforeExponentCheck() {
         console.log("Error");
         return "error";
       } else if (calculation[i - 1] === ".") {
+        console.log("Error");
+        return "error";
+      }
+    }
+  }
+}
+
+function afterExponentCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "^") {
+      if (calculation[i + 1] === ")") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "SqRt") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "^") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "%") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "/") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "x") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "-") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "+") {
         console.log("Error");
         return "error";
       }

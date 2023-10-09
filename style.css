@@ -52,6 +52,7 @@ Btn Border: #495057
   display: flex;
   justify-content: right;
   align-items: center;
+  overflow: hidden;
 }
 
 .show-eval {

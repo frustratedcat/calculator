@@ -12,7 +12,7 @@ const btnBack = document.querySelector(".btn-back");
 const btnLeftParen = document.querySelector(".btn-left-paren");
 const btnRightParen = document.querySelector(".btn-right-paren");
 
-const btnNegative = document.querySelector(".btn-negative");
+const btnSquareRoot = document.querySelector(".btn-square-root");
 const btnPower = document.querySelector(".btn-power");
 const btnPercent = document.querySelector(".btn-percent");
 const btnDivide = document.querySelector(".btn-divide");
@@ -136,8 +136,8 @@ const showOnScreen = function () {
         calculation.push("/");
         showEval.textContent = calculation.join("");
         console.log(calculation);
-      } else if (numberClick === "btn-negative") {
-        calculation.push("-");
+      } else if (numberClick === "btn-square-root") {
+        calculation.push("SqRt");
         showEval.textContent = calculation.join("");
         console.log(calculation);
       } else if (numberClick === "btn-power") {

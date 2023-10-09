@@ -176,11 +176,10 @@ const calculateEval = function () {
       if (e.target.matches(".btn-calc")) {
         if (e.target.matches(".btn-equals")) {
           console.log(`equals check: ${calculation.join("")}`);
-          for (let i = 0; i < calculation.length; i++) {
-            console.log(`equals check 2: ${calculation[i]}`);
-            parenthesisCheck();
-          }
+          parenthesisCheck();
+
           calculation.length = 0;
+          parenthesisCheckArray.length = 0;
         }
       }
     });
@@ -188,6 +187,7 @@ const calculateEval = function () {
 };
 
 function parenthesisCheck() {
+  checkNumberOfParenthesis();
   checkStartsWithRightParenthesis();
   checkEndsWithLeftParenthesis();
   checkParenthesisClose();
@@ -203,6 +203,16 @@ function checkEndsWithLeftParenthesis() {
   if (calculation.slice(-1)[0] === "(") {
     console.log("Error: Ends with (");
   }
+}
+
+function checkNumberOfParenthesis() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "(" || calculation[i] === ")") {
+      parenthesisCheckArray.push(calculation[i]);
+    }
+  }
+  console.log(`parenthesis check array = ${parenthesisCheckArray}`);
+  console.log(parenthesisCheckArray.length);
 }
 
 function checkParenthesisClose() {

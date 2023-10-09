@@ -156,6 +156,7 @@ const calculateEval = function () {
           parenthesisCheck();
           squareRootCheck();
           exponentCheck();
+          percentageCheck();
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
@@ -311,6 +312,75 @@ function afterExponentCheck() {
         console.log("Error");
         return "error";
       } else if (calculation[i + 1] === "SqRt") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "^") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "%") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "/") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "x") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "-") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i + 1] === "+") {
+        console.log("Error");
+        return "error";
+      }
+    }
+  }
+}
+
+function percentageCheck() {
+  beforePercentageCheck();
+  afterPercentageCheck();
+}
+
+function beforePercentageCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "%") {
+      if (calculation[i - 1] === "(") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "SqRt") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "^") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "%") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "/") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "x") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "-") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === "+") {
+        console.log("Error");
+        return "error";
+      } else if (calculation[i - 1] === ".") {
+        console.log("Error");
+        return "error";
+      }
+    }
+  }
+}
+
+function afterPercentageCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "%") {
+      if (calculation[i + 1] === "SqRt") {
         console.log("Error");
         return "error";
       } else if (calculation[i + 1] === "^") {

@@ -188,19 +188,32 @@ const calculateEval = function () {
 };
 
 function parenthesisCheck() {
-  startsWithRightParenthesis();
-  endsWithLeftParenthesis();
+  checkStartsWithRightParenthesis();
+  checkEndsWithLeftParenthesis();
+  checkParenthesisClose();
 }
 
-function startsWithRightParenthesis() {
+function checkStartsWithRightParenthesis() {
   if (calculation[0] === ")") {
     console.log("Error: Starts with )");
   }
 }
 
-function endsWithLeftParenthesis() {
+function checkEndsWithLeftParenthesis() {
   if (calculation.slice(-1)[0] === "(") {
     console.log("Error: Ends with (");
+  }
+}
+
+function checkParenthesisClose() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "(") {
+      if (calculation.indexOf(")") === -1) {
+        console.log("Error: No closing parenthesis");
+      } else {
+        console.log(`Closing parenthesis at ${calculation.indexOf(")")}`);
+      }
+    }
   }
 }
 

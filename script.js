@@ -37,6 +37,7 @@ const btnDecimal = document.querySelector(".btn-decimal");
 const btnEquals = document.querySelector(".btn-equals");
 
 let btnCalc = document.querySelectorAll(".btn-calc");
+let btnNumber = document.querySelectorAll(".btn-number");
 
 const calculation = [];
 let numberClick;

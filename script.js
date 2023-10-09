@@ -187,7 +187,22 @@ const calculateEval = function () {
   }
 };
 
-function parenthesisCheck() {}
+function parenthesisCheck() {
+  startsWithRightParenthesis();
+  endsWithLeftParenthesis();
+}
+
+function startsWithRightParenthesis() {
+  if (calculation[0] === ")") {
+    console.log("Error: Starts with )");
+  }
+}
+
+function endsWithLeftParenthesis() {
+  if (calculation.slice(-1)[0] === "(") {
+    console.log("Error: Ends with (");
+  }
+}
 
 chooseDarkLightMode();
 calculateEval();

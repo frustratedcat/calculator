@@ -182,6 +182,8 @@ const calculateEval = function () {
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
+          numberLeftParenthesisCheck.length = 0;
+          numberRightParenthesisCheck.length = 0;
         }
       }
     });
@@ -192,6 +194,7 @@ function parenthesisCheck() {
   checkNumberOfParenthesis();
   checkNumberLeftParenthesis();
   checkNumberRightParenthesis();
+  checkTotalLeftRightParenthesis();
   checkStartsWithRightParenthesis();
   checkEndsWithLeftParenthesis();
   checkParenthesisClose();
@@ -200,12 +203,14 @@ function parenthesisCheck() {
 function checkStartsWithRightParenthesis() {
   if (calculation[0] === ")") {
     console.log("Error: Starts with )");
+    return "error";
   }
 }
 
 function checkEndsWithLeftParenthesis() {
   if (calculation.slice(-1)[0] === "(") {
     console.log("Error: Ends with (");
+    return "error";
   }
 }
 
@@ -215,10 +220,6 @@ function checkNumberLeftParenthesis() {
       numberLeftParenthesisCheck.push(calculation[i]);
     }
   }
-  console.log(`Left parenthesis check array = ${numberLeftParenthesisCheck}`);
-  console.log(
-    `Left parenthesis check array length = ${numberLeftParenthesisCheck.length}`
-  );
 }
 
 function checkNumberRightParenthesis() {
@@ -227,10 +228,15 @@ function checkNumberRightParenthesis() {
       numberRightParenthesisCheck.push(calculation[i]);
     }
   }
-  console.log(`Right parenthesis check array = ${numberRightParenthesisCheck}`);
-  console.log(
-    `Right parenthesis check array length = ${numberRightParenthesisCheck.length}`
-  );
+}
+
+function checkTotalLeftRightParenthesis() {
+  if (
+    numberLeftParenthesisCheck.length !== numberRightParenthesisCheck.length
+  ) {
+    console.log(`Error: Missing Parenthesis`);
+    return "error";
+  }
 }
 
 function checkNumberOfParenthesis() {
@@ -239,10 +245,6 @@ function checkNumberOfParenthesis() {
       parenthesisCheckArray.push(calculation[i]);
     }
   }
-  console.log(`parenthesis check array = ${parenthesisCheckArray}`);
-  console.log(
-    `parenthesis check array length = ${parenthesisCheckArray.length}`
-  );
 }
 
 function checkParenthesisClose() {
@@ -250,15 +252,7 @@ function checkParenthesisClose() {
     if (parenthesisCheckArray[i] === "(") {
       if (parenthesisCheckArray.indexOf(")") === -1) {
         console.log("Error: No closing parenthesis");
-      } else {
-        console.log(
-          `Closing parenthesis at ${parenthesisCheckArray.indexOf(")")}`
-        );
-        parenthesisCheckArray.splice(
-          parenthesisCheckArray.indexOf("("),
-          parenthesisCheckArray.indexOf(")") + 1
-        );
-        console.log(`parenthesis check array final ${parenthesisCheckArray}`);
+        return "error";
       }
     }
   }

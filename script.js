@@ -41,6 +41,8 @@ let btnCalc = document.querySelectorAll(".btn-calc");
 const calculation = [];
 let numberClick;
 const parenthesisCheckArray = [];
+const numberLeftParenthesisCheck = [];
+const numberRightParenthesisCheck = [];
 
 const showEval = document.querySelector(".show-eval");
 
@@ -188,6 +190,8 @@ const calculateEval = function () {
 
 function parenthesisCheck() {
   checkNumberOfParenthesis();
+  checkNumberLeftParenthesis();
+  checkNumberRightParenthesis();
   checkStartsWithRightParenthesis();
   checkEndsWithLeftParenthesis();
   checkParenthesisClose();
@@ -205,6 +209,30 @@ function checkEndsWithLeftParenthesis() {
   }
 }
 
+function checkNumberLeftParenthesis() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "(") {
+      numberLeftParenthesisCheck.push(calculation[i]);
+    }
+  }
+  console.log(`Left parenthesis check array = ${numberLeftParenthesisCheck}`);
+  console.log(
+    `Left parenthesis check array length = ${numberLeftParenthesisCheck.length}`
+  );
+}
+
+function checkNumberRightParenthesis() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === ")") {
+      numberRightParenthesisCheck.push(calculation[i]);
+    }
+  }
+  console.log(`Right parenthesis check array = ${numberRightParenthesisCheck}`);
+  console.log(
+    `Right parenthesis check array length = ${numberRightParenthesisCheck.length}`
+  );
+}
+
 function checkNumberOfParenthesis() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "(" || calculation[i] === ")") {
@@ -212,16 +240,25 @@ function checkNumberOfParenthesis() {
     }
   }
   console.log(`parenthesis check array = ${parenthesisCheckArray}`);
-  console.log(parenthesisCheckArray.length);
+  console.log(
+    `parenthesis check array length = ${parenthesisCheckArray.length}`
+  );
 }
 
 function checkParenthesisClose() {
-  for (let i = 0; i < calculation.length; i++) {
-    if (calculation[i] === "(") {
-      if (calculation.indexOf(")") === -1) {
+  for (let i = 0; i < parenthesisCheckArray.length; i++) {
+    if (parenthesisCheckArray[i] === "(") {
+      if (parenthesisCheckArray.indexOf(")") === -1) {
         console.log("Error: No closing parenthesis");
       } else {
-        console.log(`Closing parenthesis at ${calculation.indexOf(")")}`);
+        console.log(
+          `Closing parenthesis at ${parenthesisCheckArray.indexOf(")")}`
+        );
+        parenthesisCheckArray.splice(
+          parenthesisCheckArray.indexOf("("),
+          parenthesisCheckArray.indexOf(")") + 1
+        );
+        console.log(`parenthesis check array final ${parenthesisCheckArray}`);
       }
     }
   }

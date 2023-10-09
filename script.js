@@ -258,5 +258,9 @@ function checkParenthesisClose() {
   }
 }
 
-chooseDarkLightMode();
-calculateEval();
+const useCalculator = function () {
+  chooseDarkLightMode();
+  calculateEval();
+};
+
+useCalculator();

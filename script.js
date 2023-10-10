@@ -44,6 +44,10 @@ let numberClick;
 const parenthesisCheckArray = [];
 const numberLeftParenthesisCheck = [];
 const numberRightParenthesisCheck = [];
+const numbers = [];
+const nonNumbers = [];
+const splicedItems = [];
+const joinedItems = [];
 
 const showEval = document.querySelector(".show-eval");
 
@@ -158,6 +162,8 @@ const calculateEval = function () {
           squareRootCheck();
           exponentCheck();
           percentageCheck();
+          joinSplicedItems();
+          calcSquareRoot();
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
@@ -403,6 +409,34 @@ function afterPercentageCheck() {
         console.log("Error");
         return "error";
       }
+    }
+  }
+}
+
+function getSplicedItems() {
+  for (let i = 0; i < calculation.length; i++) {
+    console.log(typeof calculation[i]);
+    if (typeof calculation[i] !== "number") {
+      splicedItems.push(
+        calculation.splice(0, calculation.indexOf(calculation[i]))
+      );
+    }
+  }
+}
+
+function joinSplicedItems() {
+  getSplicedItems();
+  let joined = splicedItems[0].join("");
+  splicedItems.length = 0;
+  joinedItems.push(joined);
+  console.log(joinedItems);
+  console.log(`joined items ${joinedItems}`);
+}
+
+function calcSquareRoot() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "SqRt") {
+      console.log(Math.sqrt(calculation[i + 1]));
     }
   }
 }

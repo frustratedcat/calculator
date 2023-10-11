@@ -164,6 +164,7 @@ const calculateEval = function () {
           percentageCheck();
           divisionCheck();
           multiplicationCheck();
+          subtractionCheck();
           joinAll();
 
           calculation.length = 0;
@@ -375,6 +376,7 @@ function beforeDivisionCheck() {
         else if (calculation[i - 1] === "x") throw "Error";
         else if (calculation[i - 1] === "-") throw "Error";
         else if (calculation[i - 1] === "+") throw "Error";
+        else if (calculation[i - 1] === ".") throw "Error";
       } catch (error) {
         console.log(error);
       }
@@ -416,6 +418,7 @@ function beforeMultiplicationCheck() {
         else if (calculation[i - 1] === "x") throw "Error";
         else if (calculation[i - 1] === "-") throw "Error";
         else if (calculation[i - 1] === "+") throw "Error";
+        else if (calculation[i - 1] === ".") throw "Error";
       } catch (error) {
         console.log(error);
       }
@@ -430,6 +433,41 @@ function afterMultiplicationCheck() {
         if (calculation[i + 1] === undefined) throw "Error";
         else if (calculation[i + 1] === ")") throw "Error";
         else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function subtractionCheck() {
+  beforeSubtractionCheck();
+  afterSubtractionCheck();
+}
+
+function beforeSubtractionCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "-") {
+      try {
+        if (calculation[i - 1] === ".") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function afterSubtractionCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "-") {
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "%") throw "Error";
         else if (calculation[i + 1] === "/") throw "Error";
         else if (calculation[i + 1] === "x") throw "Error";
         else if (calculation[i + 1] === "+") throw "Error";

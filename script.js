@@ -163,7 +163,6 @@ const calculateEval = function () {
           exponentCheck();
           percentageCheck();
           joinAll();
-          calcSquareRoot();
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
@@ -466,14 +465,6 @@ function joinAll() {
   for (let i = 0; calculation.length > 0; i++) {
     if (calculation.length > 0) {
       joinSplicedItems();
-    }
-  }
-}
-
-function calcSquareRoot() {
-  for (let i = 0; i < calculation.length; i++) {
-    if (calculation[i] === "SqRt") {
-      console.log(Math.sqrt(calculation[i + 1]));
     }
   }
 }

@@ -48,6 +48,7 @@ const numbers = [];
 const nonNumbers = [];
 const splicedItems = [];
 const joinedItems = [];
+const joinArrays = [];
 
 const showEval = document.querySelector(".show-eval");
 
@@ -168,14 +169,18 @@ const calculateEval = function () {
             subtractionCheck();
             additionCheck();
             decimalCheck();
-            joinAll();
+            combineArrays();
           } catch (error) {
             console.log("error");
+            console.log(error.message);
           } finally {
             calculation.length = 0;
             parenthesisCheckArray.length = 0;
             numberLeftParenthesisCheck.length = 0;
             numberRightParenthesisCheck.length = 0;
+            joinedItems.length = 0;
+            joinArrays.length = 0;
+            console.log("done");
           }
         }
       }
@@ -539,6 +544,16 @@ function joinAll() {
     if (calculation.length > 0) {
       joinSplicedItems();
     }
+  }
+}
+
+function combineArrays() {
+  joinAll();
+  for (let i = joinedItems.length; joinedItems.length > 0; i--) {
+    joinArrays.push(joinedItems[0]);
+    joinedItems.splice(0, 1);
+    console.log(`join arrays = ${joinArrays}`);
+    console.log(joinArrays);
   }
 }
 

@@ -185,16 +185,18 @@ function parenthesisCheck() {
 }
 
 function checkStartsWithRightParenthesis() {
-  if (calculation[0] === ")") {
-    console.log("Error: Starts with )");
-    return "error";
+  try {
+    if (calculation[0] === ")") throw "Error: Starts with )";
+  } catch (error) {
+    console.log(error);
   }
 }
 
 function checkEndsWithLeftParenthesis() {
-  if (calculation.slice(-1)[0] === "(") {
-    console.log("Error: Ends with (");
-    return "error";
+  try {
+    if (calculation.slice(-1)[0] === "(") throw "Error: Ends with (";
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -215,11 +217,13 @@ function checkNumberRightParenthesis() {
 }
 
 function checkTotalLeftRightParenthesis() {
-  if (
-    numberLeftParenthesisCheck.length !== numberRightParenthesisCheck.length
-  ) {
-    console.log(`Error: Missing Parenthesis`);
-    return "error";
+  try {
+    if (
+      numberLeftParenthesisCheck.length !== numberRightParenthesisCheck.length
+    )
+      throw "Error: Missing Parenthesis";
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -234,9 +238,11 @@ function checkNumberOfParenthesis() {
 function checkParenthesisClose() {
   for (let i = 0; i < parenthesisCheckArray.length; i++) {
     if (parenthesisCheckArray[i] === "(") {
-      if (parenthesisCheckArray.indexOf(")") === -1) {
-        console.log("Error: No closing parenthesis");
-        return "error";
+      try {
+        if (parenthesisCheckArray.indexOf(")") === -1)
+          throw "Error: No closing parenthesis";
+      } catch (error) {
+        console.log(error);
       }
     }
   }
@@ -245,27 +251,16 @@ function checkParenthesisClose() {
 function squareRootCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "SqRt") {
-      if (calculation[i + 1] === undefined) {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === ")") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === "^") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === "%") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === "/") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === "x") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i + 1] === "+") {
-        console.log("Error");
-        return "error";
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "%") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
       }
     }
   }

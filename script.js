@@ -422,36 +422,24 @@ function getSplicedItems() {
   });
   if (strValue !== -1) {
     console.log("strings");
-    getSplicedItemsWithSingleString();
+    getSplicedItemsWithString();
   } else {
     console.log("no strings");
     getSplicedItemsWithoutString();
   }
 }
 
-// with multiple strings, it loops through everything to both strings and then the only thing that gets joined from the initial splice is the items before the first string
-//when there are items between the first string and the next string there's a problem
-function getSplicedItemsWithSingleString() {
+function getSplicedItemsWithString() {
   for (let i = 0; i < calculation.length; i++) {
-    console.log(`running for strings: ${i}`);
     if (typeof calculation[i] !== "number") {
-      console.log(`calculation[i] is: ${calculation[i]}`);
       if (calculation.indexOf(calculation[i]) !== 0) {
-        console.log("running for !== 0");
-        console.log(
-          `get the index: ${calculation.indexOf(
-            calculation[i]
-          )} and the item: ${calculation[i]}`
-        );
         splicedItems.push(
           calculation.splice(0, calculation.indexOf(calculation[i]))
         );
-        console.log(`spliced items here: ${splicedItems}`);
-        console.log(splicedItems);
+        break;
       } else if (calculation.indexOf(calculation[i]) === 0) {
-        console.log("running for === 0");
         splicedItems.push(calculation.splice(0, 1));
-        console.log(`spliced items here: ${splicedItems}`);
+        break;
       }
     }
   }
@@ -482,7 +470,7 @@ function joinSplicedItems() {
 }
 
 function joinAll() {
-  for (let i = 0; i <= calculation.length + 1; i++) {
+  for (let i = 0; calculation.length > 0; i++) {
     if (calculation.length > 0) {
       console.log(`loop: ${i + 1}`);
       console.log(calculation);

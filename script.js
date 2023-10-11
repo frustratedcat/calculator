@@ -319,7 +319,8 @@ function beforePercentageCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "%") {
       try {
-        if (calculation[i - 1] === "(") throw "Error";
+        if (calculation[i - 1] === undefined) throw "Error";
+        else if (calculation[i - 1] === "(") throw "Error";
         else if (calculation[i - 1] === "SqRt") throw "Error";
         else if (calculation[i - 1] === "^") throw "Error";
         else if (calculation[i - 1] === "%") throw "Error";

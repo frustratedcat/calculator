@@ -318,33 +318,18 @@ function percentageCheck() {
 function beforePercentageCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "%") {
-      if (calculation[i - 1] === "(") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "SqRt") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "^") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "%") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "/") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "x") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "-") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === "+") {
-        console.log("Error");
-        return "error";
-      } else if (calculation[i - 1] === ".") {
-        console.log("Error");
-        return "error";
+      try {
+        if (calculation[i - 1] === "(") throw "Error";
+        else if (calculation[i - 1] === "SqRt") throw "Error";
+        else if (calculation[i - 1] === "^") throw "Error";
+        else if (calculation[i - 1] === "%") throw "Error";
+        else if (calculation[i - 1] === "/") throw "Error";
+        else if (calculation[i - 1] === "x") throw "Error";
+        else if (calculation[i - 1] === "-") throw "Error";
+        else if (calculation[i - 1] === "+") throw "Error";
+        else if (calculation[i - 1] === ".") throw "Error";
+      } catch (error) {
+        console.log(error);
       }
     }
   }

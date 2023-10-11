@@ -158,16 +158,20 @@ const calculateEval = function () {
     btnCalc[i].addEventListener("click", (e) => {
       if (e.target.matches(".btn-calc")) {
         if (e.target.matches(".btn-equals")) {
-          parenthesisCheck();
-          squareRootCheck();
-          exponentCheck();
-          percentageCheck();
-          divisionCheck();
-          multiplicationCheck();
-          subtractionCheck();
-          additionCheck();
-          decimalCheck();
-          joinAll();
+          try {
+            parenthesisCheck();
+            squareRootCheck();
+            exponentCheck();
+            percentageCheck();
+            divisionCheck();
+            multiplicationCheck();
+            subtractionCheck();
+            additionCheck();
+            decimalCheck();
+            joinAll();
+          } catch (error) {
+            console.log("error");
+          }
 
           calculation.length = 0;
           parenthesisCheckArray.length = 0;
@@ -190,19 +194,11 @@ function parenthesisCheck() {
 }
 
 function checkStartsWithRightParenthesis() {
-  try {
-    if (calculation[0] === ")") throw "Error: Starts with )";
-  } catch (error) {
-    console.log(error);
-  }
+  if (calculation[0] === ")") throw "Error";
 }
 
 function checkEndsWithLeftParenthesis() {
-  try {
-    if (calculation.slice(-1)[0] === "(") throw "Error: Ends with (";
-  } catch (error) {
-    console.log(error);
-  }
+  if (calculation.slice(-1)[0] === "(") throw "Error";
 }
 
 function checkNumberLeftParenthesis() {
@@ -222,14 +218,8 @@ function checkNumberRightParenthesis() {
 }
 
 function checkTotalLeftRightParenthesis() {
-  try {
-    if (
-      numberLeftParenthesisCheck.length !== numberRightParenthesisCheck.length
-    )
-      throw "Error: Missing Parenthesis";
-  } catch (error) {
-    console.log(error);
-  }
+  if (numberLeftParenthesisCheck.length !== numberRightParenthesisCheck.length)
+    throw "Error";
 }
 
 function checkNumberOfParenthesis() {
@@ -243,12 +233,7 @@ function checkNumberOfParenthesis() {
 function checkParenthesisClose() {
   for (let i = 0; i < parenthesisCheckArray.length; i++) {
     if (parenthesisCheckArray[i] === "(") {
-      try {
-        if (parenthesisCheckArray.indexOf(")") === -1)
-          throw "Error: No closing parenthesis";
-      } catch (error) {
-        console.log(error);
-      }
+      if (parenthesisCheckArray.indexOf(")") === -1) throw "Error";
     }
   }
 }
@@ -256,17 +241,13 @@ function checkParenthesisClose() {
 function squareRootCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "SqRt") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "%") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "%") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -279,20 +260,16 @@ function exponentCheck() {
 function beforeExponentCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "^") {
-      try {
-        if (calculation[i - 1] === undefined) throw "Error";
-        else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === "SqRt") throw "Error";
-        else if (calculation[i - 1] === "^") throw "Error";
-        else if (calculation[i - 1] === "%") throw "Error";
-        else if (calculation[i - 1] === "/") throw "Error";
-        else if (calculation[i - 1] === "x") throw "Error";
-        else if (calculation[i - 1] === "-") throw "Error";
-        else if (calculation[i - 1] === "+") throw "Error";
-        else if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === undefined) throw "Error";
+      else if (calculation[i - 1] === "(") throw "Error";
+      else if (calculation[i - 1] === "SqRt") throw "Error";
+      else if (calculation[i - 1] === "^") throw "Error";
+      else if (calculation[i - 1] === "%") throw "Error";
+      else if (calculation[i - 1] === "/") throw "Error";
+      else if (calculation[i - 1] === "x") throw "Error";
+      else if (calculation[i - 1] === "-") throw "Error";
+      else if (calculation[i - 1] === "+") throw "Error";
+      else if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -300,19 +277,15 @@ function beforeExponentCheck() {
 function afterExponentCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "^") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "SqRt") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "%") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "-") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "SqRt") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "%") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "-") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -325,20 +298,16 @@ function percentageCheck() {
 function beforePercentageCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "%") {
-      try {
-        if (calculation[i - 1] === undefined) throw "Error";
-        else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === "SqRt") throw "Error";
-        else if (calculation[i - 1] === "^") throw "Error";
-        else if (calculation[i - 1] === "%") throw "Error";
-        else if (calculation[i - 1] === "/") throw "Error";
-        else if (calculation[i - 1] === "x") throw "Error";
-        else if (calculation[i - 1] === "-") throw "Error";
-        else if (calculation[i - 1] === "+") throw "Error";
-        else if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === undefined) throw "Error";
+      else if (calculation[i - 1] === "(") throw "Error";
+      else if (calculation[i - 1] === "SqRt") throw "Error";
+      else if (calculation[i - 1] === "^") throw "Error";
+      else if (calculation[i - 1] === "%") throw "Error";
+      else if (calculation[i - 1] === "/") throw "Error";
+      else if (calculation[i - 1] === "x") throw "Error";
+      else if (calculation[i - 1] === "-") throw "Error";
+      else if (calculation[i - 1] === "+") throw "Error";
+      else if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -346,17 +315,13 @@ function beforePercentageCheck() {
 function afterPercentageCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "%") {
-      try {
-        if (calculation[i + 1] === "SqRt") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "%") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "-") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === "SqRt") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "%") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "-") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -369,19 +334,15 @@ function divisionCheck() {
 function beforeDivisionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "/") {
-      try {
-        if (calculation[i - 1] === undefined) throw "Error";
-        else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === "SqRt") throw "Error";
-        else if (calculation[i - 1] === "^") throw "Error";
-        else if (calculation[i - 1] === "/") throw "Error";
-        else if (calculation[i - 1] === "x") throw "Error";
-        else if (calculation[i - 1] === "-") throw "Error";
-        else if (calculation[i - 1] === "+") throw "Error";
-        else if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === undefined) throw "Error";
+      else if (calculation[i - 1] === "(") throw "Error";
+      else if (calculation[i - 1] === "SqRt") throw "Error";
+      else if (calculation[i - 1] === "^") throw "Error";
+      else if (calculation[i - 1] === "/") throw "Error";
+      else if (calculation[i - 1] === "x") throw "Error";
+      else if (calculation[i - 1] === "-") throw "Error";
+      else if (calculation[i - 1] === "+") throw "Error";
+      else if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -389,16 +350,12 @@ function beforeDivisionCheck() {
 function afterDivisionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "/") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -411,19 +368,15 @@ function multiplicationCheck() {
 function beforeMultiplicationCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "x") {
-      try {
-        if (calculation[i - 1] === undefined) throw "Error";
-        else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === "SqRt") throw "Error";
-        else if (calculation[i - 1] === "^") throw "Error";
-        else if (calculation[i - 1] === "/") throw "Error";
-        else if (calculation[i - 1] === "x") throw "Error";
-        else if (calculation[i - 1] === "-") throw "Error";
-        else if (calculation[i - 1] === "+") throw "Error";
-        else if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === undefined) throw "Error";
+      else if (calculation[i - 1] === "(") throw "Error";
+      else if (calculation[i - 1] === "SqRt") throw "Error";
+      else if (calculation[i - 1] === "^") throw "Error";
+      else if (calculation[i - 1] === "/") throw "Error";
+      else if (calculation[i - 1] === "x") throw "Error";
+      else if (calculation[i - 1] === "-") throw "Error";
+      else if (calculation[i - 1] === "+") throw "Error";
+      else if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -431,16 +384,12 @@ function beforeMultiplicationCheck() {
 function afterMultiplicationCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "x") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -453,11 +402,7 @@ function subtractionCheck() {
 function beforeSubtractionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "-") {
-      try {
-        if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -465,17 +410,13 @@ function beforeSubtractionCheck() {
 function afterSubtractionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "-") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "%") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "%") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -488,19 +429,15 @@ function additionCheck() {
 function beforeAdditionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "+") {
-      try {
-        if (calculation[i - 1] === undefined) throw "Error";
-        else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === "SqRt") throw "Error";
-        else if (calculation[i - 1] === "^") throw "Error";
-        else if (calculation[i - 1] === "/") throw "Error";
-        else if (calculation[i - 1] === "x") throw "Error";
-        else if (calculation[i - 1] === "-") throw "Error";
-        else if (calculation[i - 1] === "+") throw "Error";
-        else if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === undefined) throw "Error";
+      else if (calculation[i - 1] === "(") throw "Error";
+      else if (calculation[i - 1] === "SqRt") throw "Error";
+      else if (calculation[i - 1] === "^") throw "Error";
+      else if (calculation[i - 1] === "/") throw "Error";
+      else if (calculation[i - 1] === "x") throw "Error";
+      else if (calculation[i - 1] === "-") throw "Error";
+      else if (calculation[i - 1] === "+") throw "Error";
+      else if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -508,16 +445,12 @@ function beforeAdditionCheck() {
 function afterAdditionCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "+") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
     }
   }
 }
@@ -530,11 +463,7 @@ function decimalCheck() {
 function beforeDecimalCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === ".") {
-      try {
-        if (calculation[i - 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i - 1] === ".") throw "Error";
     }
   }
 }
@@ -542,20 +471,16 @@ function beforeDecimalCheck() {
 function afterDecimalCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === ".") {
-      try {
-        if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === "SqRt") throw "Error";
-        else if (calculation[i + 1] === ")") throw "Error";
-        else if (calculation[i + 1] === "^") throw "Error";
-        else if (calculation[i + 1] === "%") throw "Error";
-        else if (calculation[i + 1] === "/") throw "Error";
-        else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "-") throw "Error";
-        else if (calculation[i + 1] === "+") throw "Error";
-        else if (calculation[i + 1] === ".") throw "Error";
-      } catch (error) {
-        console.log(error);
-      }
+      if (calculation[i + 1] === undefined) throw "Error";
+      else if (calculation[i + 1] === "SqRt") throw "Error";
+      else if (calculation[i + 1] === ")") throw "Error";
+      else if (calculation[i + 1] === "^") throw "Error";
+      else if (calculation[i + 1] === "%") throw "Error";
+      else if (calculation[i + 1] === "/") throw "Error";
+      else if (calculation[i + 1] === "x") throw "Error";
+      else if (calculation[i + 1] === "-") throw "Error";
+      else if (calculation[i + 1] === "+") throw "Error";
+      else if (calculation[i + 1] === ".") throw "Error";
     }
   }
 }

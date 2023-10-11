@@ -166,6 +166,7 @@ const calculateEval = function () {
           multiplicationCheck();
           subtractionCheck();
           additionCheck();
+          decimalCheck();
           joinAll();
 
           calculation.length = 0;
@@ -514,6 +515,44 @@ function afterAdditionCheck() {
         else if (calculation[i + 1] === "/") throw "Error";
         else if (calculation[i + 1] === "x") throw "Error";
         else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function decimalCheck() {
+  beforeDecimalCheck();
+  afterDecimalCheck();
+}
+
+function beforeDecimalCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === ".") {
+      try {
+        if (calculation[i - 1] === ".") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function afterDecimalCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === ".") {
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === "SqRt") throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "%") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
+        else if (calculation[i + 1] === "-") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+        else if (calculation[i + 1] === ".") throw "Error";
       } catch (error) {
         console.log(error);
       }

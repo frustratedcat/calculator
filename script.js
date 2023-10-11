@@ -163,6 +163,7 @@ const calculateEval = function () {
           exponentCheck();
           percentageCheck();
           divisionCheck();
+          multiplicationCheck();
           joinAll();
 
           calculation.length = 0;
@@ -368,7 +369,6 @@ function beforeDivisionCheck() {
       try {
         if (calculation[i - 1] === undefined) throw "Error";
         else if (calculation[i - 1] === "(") throw "Error";
-        else if (calculation[i - 1] === ")") throw "Error";
         else if (calculation[i - 1] === "SqRt") throw "Error";
         else if (calculation[i - 1] === "^") throw "Error";
         else if (calculation[i - 1] === "/") throw "Error";
@@ -387,12 +387,51 @@ function afterDivisionCheck() {
     if (calculation[i] === "/") {
       try {
         if (calculation[i + 1] === undefined) throw "Error";
-        else if (calculation[i + 1] === "(") throw "Error";
         else if (calculation[i + 1] === ")") throw "Error";
         else if (calculation[i + 1] === "^") throw "Error";
         else if (calculation[i + 1] === "/") throw "Error";
         else if (calculation[i + 1] === "x") throw "Error";
-        else if (calculation[i + 1] === "-") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function multiplicationCheck() {
+  beforeMultiplicationCheck();
+  afterMultiplicationCheck();
+}
+
+function beforeMultiplicationCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "x") {
+      try {
+        if (calculation[i - 1] === undefined) throw "Error";
+        else if (calculation[i - 1] === "(") throw "Error";
+        else if (calculation[i - 1] === "SqRt") throw "Error";
+        else if (calculation[i - 1] === "^") throw "Error";
+        else if (calculation[i - 1] === "/") throw "Error";
+        else if (calculation[i - 1] === "x") throw "Error";
+        else if (calculation[i - 1] === "-") throw "Error";
+        else if (calculation[i - 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function afterMultiplicationCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "x") {
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
         else if (calculation[i + 1] === "+") throw "Error";
       } catch (error) {
         console.log(error);

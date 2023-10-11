@@ -171,8 +171,8 @@ const calculateEval = function () {
             decimalCheck();
             combineArrays();
           } catch (error) {
-            console.log("error");
-            console.log(error.message);
+            console.error(error);
+            console.error(error.message);
           } finally {
             calculation.length = 0;
             parenthesisCheckArray.length = 0;

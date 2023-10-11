@@ -421,10 +421,8 @@ function getSplicedItems() {
     return typeof value === "string";
   });
   if (strValue !== -1) {
-    console.log("strings");
     getSplicedItemsWithString();
   } else {
-    console.log("no strings");
     getSplicedItemsWithoutString();
   }
 }
@@ -446,7 +444,6 @@ function getSplicedItemsWithString() {
 }
 
 function getSplicedItemsWithoutString() {
-  console.log("running for no strings");
   for (let i = 0; i < calculation.length; i++) {
     splicedItems.push(calculation.splice(0, calculation.slice(-1)[0]));
   }
@@ -460,22 +457,14 @@ function joinSplicedItems() {
   getSplicedItems();
   let joined = splicedItems[0].join("");
   console.log(`joined = ${joined}`);
-  console.log(`remaining spliced items before reset: ${splicedItems[0]}`);
-  console.log(`spliced items length before reset: ${splicedItems[0].length}`);
   splicedItems.length = 0;
-  console.log(`spliced items length after reset: ${splicedItems.length}`);
   joinedItems.push(joined);
-  console.log(joinedItems);
   console.log(`joined items ${joinedItems}`);
 }
 
 function joinAll() {
   for (let i = 0; calculation.length > 0; i++) {
     if (calculation.length > 0) {
-      console.log(`loop: ${i + 1}`);
-      console.log(calculation);
-      console.log(calculation.length, i);
-      console.log(`calculation ${calculation}`);
       joinSplicedItems();
     }
   }

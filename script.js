@@ -170,7 +170,7 @@ const calculateEval = function () {
             subtractionCheck();
             additionCheck();
             decimalCheck();
-            makeCalculation();
+            convertNumbers();
           } catch (error) {
             console.error(error);
             console.error(error.message);
@@ -558,7 +558,7 @@ function combineArrays() {
   }
 }
 
-function makeCalculation() {
+function convertNumbers() {
   combineArrays();
   for (let i = 0; i < joinArrays.length; i++) {
     console.log(`here is the array ${joinArrays[i]}`);

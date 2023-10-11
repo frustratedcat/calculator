@@ -375,6 +375,25 @@ function beforeDivisionCheck() {
   }
 }
 
+function afterDivisionCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "/") {
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === "(") throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
+        else if (calculation[i + 1] === "-") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
 function getSplicedItems() {
   if (calculation.length === 1) {
     singleSplicedItem();

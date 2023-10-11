@@ -49,6 +49,7 @@ const nonNumbers = [];
 const splicedItems = [];
 const joinedItems = [];
 const joinArrays = [];
+let calcString = "";
 
 const showEval = document.querySelector(".show-eval");
 
@@ -169,7 +170,7 @@ const calculateEval = function () {
             subtractionCheck();
             additionCheck();
             decimalCheck();
-            combineArrays();
+            makeCalculation();
           } catch (error) {
             console.error(error);
             console.error(error.message);
@@ -532,6 +533,7 @@ function singleSplicedItem() {
 
 function joinSplicedItems() {
   getSplicedItems();
+  console.log(typeof splicedItems[0][0]);
   let joined = splicedItems[0].join("");
   console.log(`joined = ${joined}`);
   splicedItems.length = 0;
@@ -553,7 +555,39 @@ function combineArrays() {
     joinArrays.push(joinedItems[0]);
     joinedItems.splice(0, 1);
     console.log(`join arrays = ${joinArrays}`);
-    console.log(joinArrays);
+  }
+}
+
+function makeCalculation() {
+  combineArrays();
+  for (let i = 0; i < joinArrays.length; i++) {
+    console.log(`here is the array ${joinArrays[i]}`);
+    if (joinArrays[i].length > 1) {
+      joinArrays[i] = Number(joinArrays[i]);
+      console.log(
+        `more than one item: type: ${typeof joinArrays[i]} and number: ${
+          joinArrays[i]
+        }`
+      );
+    } else if (joinArrays[i].length === 1) {
+      if (
+        joinArrays[i] === "0" ||
+        joinArrays[i] === "1" ||
+        joinArrays[i] === "2" ||
+        joinArrays[i] === "3" ||
+        joinArrays[i] === "4" ||
+        joinArrays[i] === "5" ||
+        joinArrays[i] === "6" ||
+        joinArrays[i] === "7" ||
+        joinArrays[i] === "8" ||
+        joinArrays[i] === "9"
+      ) {
+        joinArrays[i] = Number(joinArrays[i]);
+        console.log(
+          `type is: ${typeof joinArrays[i]}, and number is: ${joinArrays[i]}`
+        );
+      }
+    }
   }
 }
 

@@ -165,6 +165,7 @@ const calculateEval = function () {
           divisionCheck();
           multiplicationCheck();
           subtractionCheck();
+          additionCheck();
           joinAll();
 
           calculation.length = 0;
@@ -468,6 +469,48 @@ function afterSubtractionCheck() {
         else if (calculation[i + 1] === ")") throw "Error";
         else if (calculation[i + 1] === "^") throw "Error";
         else if (calculation[i + 1] === "%") throw "Error";
+        else if (calculation[i + 1] === "/") throw "Error";
+        else if (calculation[i + 1] === "x") throw "Error";
+        else if (calculation[i + 1] === "+") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function additionCheck() {
+  beforeAdditionCheck();
+  afterAdditionCheck();
+}
+
+function beforeAdditionCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "+") {
+      try {
+        if (calculation[i - 1] === undefined) throw "Error";
+        else if (calculation[i - 1] === "(") throw "Error";
+        else if (calculation[i - 1] === "SqRt") throw "Error";
+        else if (calculation[i - 1] === "^") throw "Error";
+        else if (calculation[i - 1] === "/") throw "Error";
+        else if (calculation[i - 1] === "x") throw "Error";
+        else if (calculation[i - 1] === "-") throw "Error";
+        else if (calculation[i - 1] === "+") throw "Error";
+        else if (calculation[i - 1] === ".") throw "Error";
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+
+function afterAdditionCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "+") {
+      try {
+        if (calculation[i + 1] === undefined) throw "Error";
+        else if (calculation[i + 1] === ")") throw "Error";
+        else if (calculation[i + 1] === "^") throw "Error";
         else if (calculation[i + 1] === "/") throw "Error";
         else if (calculation[i + 1] === "x") throw "Error";
         else if (calculation[i + 1] === "+") throw "Error";

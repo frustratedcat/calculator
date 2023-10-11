@@ -362,6 +362,7 @@ function beforeDivisionCheck() {
       try {
         if (calculation[i - 1] === undefined) throw "Error";
         else if (calculation[i - 1] === "(") throw "Error";
+        else if (calculation[i - 1] === ")") throw "Error";
         else if (calculation[i - 1] === "SqRt") throw "Error";
         else if (calculation[i - 1] === "^") throw "Error";
         else if (calculation[i - 1] === "/") throw "Error";

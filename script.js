@@ -171,12 +171,12 @@ const calculateEval = function () {
             joinAll();
           } catch (error) {
             console.log("error");
+          } finally {
+            calculation.length = 0;
+            parenthesisCheckArray.length = 0;
+            numberLeftParenthesisCheck.length = 0;
+            numberRightParenthesisCheck.length = 0;
           }
-
-          calculation.length = 0;
-          parenthesisCheckArray.length = 0;
-          numberLeftParenthesisCheck.length = 0;
-          numberRightParenthesisCheck.length = 0;
         }
       }
     });

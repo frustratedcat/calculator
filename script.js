@@ -162,6 +162,7 @@ const calculateEval = function () {
           squareRootCheck();
           exponentCheck();
           percentageCheck();
+          divisionCheck();
           joinAll();
 
           calculation.length = 0;
@@ -354,6 +355,11 @@ function afterPercentageCheck() {
       }
     }
   }
+}
+
+function divisionCheck() {
+  beforeDivisionCheck();
+  afterDivisionCheck();
 }
 
 function beforeDivisionCheck() {

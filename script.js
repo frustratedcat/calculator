@@ -173,6 +173,7 @@ const calculateEval = function () {
             convertNumbers();
             joinDecimals();
             prepareSquareRootforCalc();
+            preparePercentageforCalc();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -331,13 +332,7 @@ function beforePercentageCheck() {
 function afterPercentageCheck() {
   for (let i = 0; i < calculation.length; i++) {
     if (calculation[i] === "%") {
-      if (calculation[i + 1] === "SqRt") throw "Error";
-      else if (calculation[i + 1] === "^") throw "Error";
-      else if (calculation[i + 1] === "%") throw "Error";
-      else if (calculation[i + 1] === "/") throw "Error";
-      else if (calculation[i + 1] === "x") throw "Error";
-      else if (calculation[i + 1] === "-") throw "Error";
-      else if (calculation[i + 1] === "+") throw "Error";
+      if (calculation[i + 1] === "%") throw "Error";
     }
   }
 }
@@ -644,7 +639,26 @@ function prepareSquareRootforCalc() {
       if (joinArrays[i] === "SqRt") {
         if (typeof joinArrays[i - 1] === "number") {
           console.log("number");
-          joinArrays.splice(joinArrays.indexOf(joinArrays[i]), 0, "x");
+          joinArrays.splice(joinArrays.indexOf(joinArrays[i - 1]), 0, "x");
+          break;
+        }
+      }
+    }
+  }
+}
+
+function preparePercentageforCalc() {
+  if (joinArrays.includes("%")) {
+    for (let i = 0; i < joinArrays.length; i++) {
+      if (joinArrays[i] === "%") {
+        if (
+          typeof joinArrays[i + 1] === "number" ||
+          joinArrays[i + 1] === "(" ||
+          joinArrays[i + 1] === ")" ||
+          joinArrays[i + 1] === "SqRt"
+        ) {
+          console.log("number");
+          joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
           break;
         }
       }

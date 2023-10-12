@@ -39,6 +39,8 @@ const btnEquals = document.querySelector(".btn-equals");
 let btnCalc = document.querySelectorAll(".btn-calc");
 let btnNumber = document.querySelectorAll(".btn-number");
 
+const showEval = document.querySelector(".show-eval");
+
 const calculation = [];
 let numberClick;
 const parenthesisCheckArray = [];
@@ -49,9 +51,7 @@ const nonNumbers = [];
 const splicedItems = [];
 const joinedItems = [];
 const joinArrays = [];
-let calcString = "";
-
-const showEval = document.querySelector(".show-eval");
+const sortedArrayForCalc = [];
 
 const chooseDarkLightMode = function () {
   darkLightModeBtn.addEventListener("click", (e) => {
@@ -563,12 +563,14 @@ function convertNumbers() {
   for (let i = 0; i < joinArrays.length; i++) {
     console.log(`here is the array ${joinArrays[i]}`);
     if (joinArrays[i].length > 1) {
-      joinArrays[i] = Number(joinArrays[i]);
-      console.log(
-        `more than one item: type: ${typeof joinArrays[i]} and number: ${
-          joinArrays[i]
-        }`
-      );
+      if (joinArrays[i] !== "SqRt") {
+        joinArrays[i] = Number(joinArrays[i]);
+        console.log(
+          `more than one item: type: ${typeof joinArrays[i]} and number: ${
+            joinArrays[i]
+          }`
+        );
+      }
     } else if (joinArrays[i].length === 1) {
       if (
         joinArrays[i] === "0" ||

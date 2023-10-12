@@ -172,6 +172,7 @@ const calculateEval = function () {
             decimalCheck();
             convertNumbers();
             joinDecimals();
+            console.log(joinArrays);
           } catch (error) {
             console.error(error);
             console.error(error.message);
@@ -604,21 +605,19 @@ function convertNumbers() {
 function joinDecimals() {
   if (joinArrays.includes(".")) {
     for (let i = 0; i < joinArrays.length; i++) {
-      console.log(`i = ${i}, joinArrays.length = ${joinArrays.length}`);
       if (joinArrays[i] === ".") {
-        console.log(`decimal at index: ${joinArrays.indexOf(joinArrays[i])}`);
         if (typeof joinArrays[i - 1] !== "number") {
           if (
             joinArrays[i - 1] === "(" ||
             joinArrays[i - 1] === ")" ||
             joinArrays[i - 1] === "SqRt" ||
             joinArrays[i - 1] === "^" ||
+            joinArrays[i - 1] === "%" ||
             joinArrays[i - 1] === "/" ||
             joinArrays[i - 1] === "x" ||
             joinArrays[i - 1] === "-" ||
             joinArrays[i - 1] === "+"
           ) {
-            console.log(joinArrays.indexOf(joinArrays[i]));
             joinArrays.splice(
               joinArrays.indexOf(joinArrays[i]),
               2,
@@ -636,7 +635,6 @@ function joinDecimals() {
       }
     }
   }
-  console.log(joinArrays);
 }
 
 const useCalculator = function () {

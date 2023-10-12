@@ -171,6 +171,7 @@ const calculateEval = function () {
             additionCheck();
             decimalCheck();
             convertNumbers();
+            joinDecimals();
           } catch (error) {
             console.error(error);
             console.error(error.message);
@@ -197,6 +198,7 @@ function parenthesisCheck() {
   checkStartsWithRightParenthesis();
   checkEndsWithLeftParenthesis();
   checkParenthesisClose();
+  emptyParenthesisCheck();
 }
 
 function checkStartsWithRightParenthesis() {
@@ -241,6 +243,12 @@ function checkParenthesisClose() {
     if (parenthesisCheckArray[i] === "(") {
       if (parenthesisCheckArray.indexOf(")") === -1) throw "Error";
     }
+  }
+}
+
+function emptyParenthesisCheck() {
+  for (let i = 0; i < calculation.length; i++) {
+    if (calculation[i] === "(" && calculation[i + 1] === ")") throw "Error";
   }
 }
 
@@ -591,6 +599,44 @@ function convertNumbers() {
       }
     }
   }
+}
+
+function joinDecimals() {
+  if (joinArrays.includes(".")) {
+    for (let i = 0; i < joinArrays.length; i++) {
+      console.log(`i = ${i}, joinArrays.length = ${joinArrays.length}`);
+      if (joinArrays[i] === ".") {
+        console.log(`decimal at index: ${joinArrays.indexOf(joinArrays[i])}`);
+        if (typeof joinArrays[i - 1] !== "number") {
+          if (
+            joinArrays[i - 1] === "(" ||
+            joinArrays[i - 1] === ")" ||
+            joinArrays[i - 1] === "SqRt" ||
+            joinArrays[i - 1] === "^" ||
+            joinArrays[i - 1] === "/" ||
+            joinArrays[i - 1] === "x" ||
+            joinArrays[i - 1] === "-" ||
+            joinArrays[i - 1] === "+"
+          ) {
+            console.log(joinArrays.indexOf(joinArrays[i]));
+            joinArrays.splice(
+              joinArrays.indexOf(joinArrays[i]),
+              2,
+              Number("0." + joinArrays[i + 1])
+            );
+            break;
+          }
+        } else if (typeof joinArrays[i - 1] === "number") {
+          joinArrays.splice(
+            joinArrays.indexOf(joinArrays[i - 1]),
+            3,
+            Number(joinArrays[i - 1] + "." + joinArrays[i + 1])
+          );
+        }
+      }
+    }
+  }
+  console.log(joinArrays);
 }
 
 const useCalculator = function () {

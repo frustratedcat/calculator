@@ -172,6 +172,7 @@ const calculateEval = function () {
             decimalCheck();
             convertNumbers();
             joinDecimals();
+            prepareSquareRootforCalc();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -631,6 +632,20 @@ function joinDecimals() {
             3,
             Number(joinArrays[i - 1] + "." + joinArrays[i + 1])
           );
+        }
+      }
+    }
+  }
+}
+
+function prepareSquareRootforCalc() {
+  if (joinArrays.includes("SqRt")) {
+    for (let i = 0; i < joinArrays.length; i++) {
+      if (joinArrays[i] === "SqRt") {
+        if (typeof joinArrays[i - 1] === "number") {
+          console.log("number");
+          joinArrays.splice(joinArrays.indexOf(joinArrays[i]), 0, "x");
+          break;
         }
       }
     }

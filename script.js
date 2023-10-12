@@ -174,6 +174,7 @@ const calculateEval = function () {
             joinDecimals();
             prepareSquareRootforCalc();
             preparePercentageforCalc();
+            prepareParenthesisforCalc();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -638,8 +639,7 @@ function prepareSquareRootforCalc() {
     for (let i = 0; i < joinArrays.length; i++) {
       if (joinArrays[i] === "SqRt") {
         if (typeof joinArrays[i - 1] === "number") {
-          console.log("number");
-          joinArrays.splice(joinArrays.indexOf(joinArrays[i - 1]), 0, "x");
+          joinArrays.splice(joinArrays.indexOf(joinArrays[i]), 0, "x");
           break;
         }
       }
@@ -657,8 +657,21 @@ function preparePercentageforCalc() {
           joinArrays[i + 1] === ")" ||
           joinArrays[i + 1] === "SqRt"
         ) {
-          console.log("number");
           joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
+          break;
+        }
+      }
+    }
+  }
+}
+
+function prepareParenthesisforCalc() {
+  if (joinArrays.includes(")")) {
+    for (let i = 0; i < joinArrays.length; i++) {
+      if (joinArrays[i] === ")") {
+        if (joinArrays[i + 1] === "(" || joinArrays[i + 1] === "SqRt") {
+          let itemIndex = joinArrays.indexOf(joinArrays[i]);
+          joinArrays.splice(itemIndex + 1, 0, "x");
           break;
         }
       }

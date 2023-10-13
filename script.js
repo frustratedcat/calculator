@@ -52,7 +52,7 @@ const splicedItems = [];
 const joinedItems = [];
 const joinArrays = [];
 const sortedArrayForCalc = [];
-const prepareforCalc = [];
+const prepareForCalc = [];
 
 const chooseDarkLightMode = function () {
   darkLightModeBtn.addEventListener("click", (e) => {
@@ -174,6 +174,7 @@ const calculateEval = function () {
             convertNumbers();
             joinDecimals();
             prepareItemsForCalc();
+            finalPreparationForCalc();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -185,7 +186,7 @@ const calculateEval = function () {
             numberRightParenthesisCheck.length = 0;
             joinedItems.length = 0;
             joinArrays.length = 0;
-            prepareforCalc.length = 0;
+            prepareForCalc.length = 0;
             console.log("done");
           }
         }
@@ -727,17 +728,33 @@ function prepareItemsForCalc() {
     if (joinArrays[0] === "-") {
       if (typeof joinArrays[1] !== "number") {
         prepareNegativesforCalc();
+        newArray.length += 1;
       }
     }
 
     preparePercentageforCalc();
 
-    prepareforCalc.push(joinArrays[0]);
+    prepareForCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);
     console.log(`Next Item: ${joinArrays[0]}`);
   }
-  console.log(`prepare for calc: ${prepareforCalc}`);
+  console.log(`prepare for calc: ${prepareForCalc}`);
   newArray.length = 0;
+}
+
+function finalPreparationForCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "SqRt") {
+      prepareForCalc[i] = "Math.sqrt";
+    } else if (prepareForCalc[i] === "^") {
+      prepareForCalc[i] = "**";
+    } else if (prepareForCalc[i] === "%") {
+      prepareForCalc[i] = "/100";
+    } else if (prepareForCalc[i] === "x") {
+      prepareForCalc[i] = "*";
+    }
+  }
+  console.log(prepareForCalc);
 }
 
 const useCalculator = function () {

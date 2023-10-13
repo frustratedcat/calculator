@@ -675,7 +675,7 @@ function prepareNegativesforCalc() {
   if (joinArrays.includes("-")) {
     for (let i = 0; i < joinArrays.length; i++) {
       if (joinArrays[i] === "-") {
-        if (typeof joinArrays[i - 1] === undefined) {
+        if (typeof joinArrays[i + 1] !== "number") {
           joinArrays.splice(joinArrays[i], 1, -1, "x");
         }
       }
@@ -724,8 +724,13 @@ function prepareItemsForCalc() {
       }
     }
 
+    if (joinArrays[0] === "-") {
+      if (typeof joinArrays[1] !== "number") {
+        prepareNegativesforCalc();
+      }
+    }
+
     preparePercentageforCalc();
-    prepareNegativesforCalc();
 
     prepareforCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);

@@ -52,6 +52,7 @@ const splicedItems = [];
 const joinedItems = [];
 const joinArrays = [];
 const sortedArrayForCalc = [];
+const prepareforCalc = [];
 
 const chooseDarkLightMode = function () {
   darkLightModeBtn.addEventListener("click", (e) => {
@@ -172,9 +173,7 @@ const calculateEval = function () {
             decimalCheck();
             convertNumbers();
             joinDecimals();
-            prepareSquareRootforCalc();
-            preparePercentageforCalc();
-            prepareParenthesisforCalc();
+            prepareItemsForCalc();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -186,6 +185,7 @@ const calculateEval = function () {
             numberRightParenthesisCheck.length = 0;
             joinedItems.length = 0;
             joinArrays.length = 0;
+            prepareforCalc.length = 0;
             console.log("done");
           }
         }
@@ -539,12 +539,9 @@ function singleSplicedItem() {
 
 function joinSplicedItems() {
   getSplicedItems();
-  console.log(typeof splicedItems[0][0]);
   let joined = splicedItems[0].join("");
-  console.log(`joined = ${joined}`);
   splicedItems.length = 0;
   joinedItems.push(joined);
-  console.log(`joined items ${joinedItems}`);
 }
 
 function joinAll() {
@@ -560,22 +557,15 @@ function combineArrays() {
   for (let i = joinedItems.length; joinedItems.length > 0; i--) {
     joinArrays.push(joinedItems[0]);
     joinedItems.splice(0, 1);
-    console.log(`join arrays = ${joinArrays}`);
   }
 }
 
 function convertNumbers() {
   combineArrays();
   for (let i = 0; i < joinArrays.length; i++) {
-    console.log(`here is the array ${joinArrays[i]}`);
     if (joinArrays[i].length > 1) {
       if (joinArrays[i] !== "SqRt") {
         joinArrays[i] = Number(joinArrays[i]);
-        console.log(
-          `more than one item: type: ${typeof joinArrays[i]} and number: ${
-            joinArrays[i]
-          }`
-        );
       }
     } else if (joinArrays[i].length === 1) {
       if (
@@ -591,9 +581,6 @@ function convertNumbers() {
         joinArrays[i] === "9"
       ) {
         joinArrays[i] = Number(joinArrays[i]);
-        console.log(
-          `type is: ${typeof joinArrays[i]}, and number is: ${joinArrays[i]}`
-        );
       }
     }
   }
@@ -638,8 +625,14 @@ function prepareSquareRootforCalc() {
   if (joinArrays.includes("SqRt")) {
     for (let i = 0; i < joinArrays.length; i++) {
       if (joinArrays[i] === "SqRt") {
-        if (typeof joinArrays[i - 1] === "number") {
-          joinArrays.splice(joinArrays.indexOf(joinArrays[i]), 0, "x");
+        if (typeof joinArrays[i + 1] === "number") {
+          joinArrays.splice(2, 0, ")");
+          joinArrays.splice(1, 0, "(");
+          break;
+        } else if (joinArrays[i + 2] === "(") {
+          console.log("Run for parenthesis");
+          joinArrays.splice(2, 0, "x");
+          console.log(joinArrays);
           break;
         }
       }
@@ -670,13 +663,76 @@ function prepareParenthesisforCalc() {
     for (let i = 0; i < joinArrays.length; i++) {
       if (joinArrays[i] === ")") {
         if (joinArrays[i + 1] === "(" || joinArrays[i + 1] === "SqRt") {
-          let itemIndex = joinArrays.indexOf(joinArrays[i]);
-          joinArrays.splice(itemIndex + 1, 0, "x");
+          joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
           break;
         }
       }
     }
   }
+}
+
+function prepareNegativesforCalc() {
+  if (joinArrays.includes("-")) {
+    for (let i = 0; i < joinArrays.length; i++) {
+      if (joinArrays[i] === "-") {
+        if (typeof joinArrays[i - 1] === undefined) {
+          joinArrays.splice(joinArrays[i], 1, -1, "x");
+        }
+      }
+    }
+  }
+}
+
+function prepareItemsForCalc() {
+  const newArray = [];
+  for (let i = 0; i < joinArrays.length; i++) {
+    newArray.push(joinArrays[i]);
+  }
+  for (let i = 0; i < newArray.length; i++) {
+    console.log(`Loop Number: ${i + 1}`);
+    console.log(`Item Up: ${joinArrays[0]}`);
+
+    if (joinArrays[0] === ")") {
+      let getIndexOpeningParenthesis = joinArrays.indexOf("(");
+      let getIndexClosingParenthesis = joinArrays.indexOf(joinArrays[0]);
+      let getSquareRootIndex = joinArrays.indexOf("SqRt");
+      console.log(
+        `Opening Parenthesis Index: ${getIndexOpeningParenthesis}\nClosing Parenthesis Index: ${getIndexClosingParenthesis}\nSquare Root Index: ${getSquareRootIndex}`
+      );
+      console.log(joinArrays);
+      if (getIndexOpeningParenthesis > getIndexClosingParenthesis) {
+        prepareParenthesisforCalc();
+        console.log(joinArrays);
+        newArray.length += 1;
+      } else if (
+        getSquareRootIndex > getIndexClosingParenthesis &&
+        joinArrays[1] === "SqRt"
+      ) {
+        prepareParenthesisforCalc();
+        console.log(joinArrays);
+        newArray.length += 1;
+      }
+    }
+
+    if (joinArrays[0] === "SqRt") {
+      if (typeof joinArrays[1] === "number") {
+        prepareSquareRootforCalc();
+        newArray.length += 2;
+      } else if (joinArrays[1] === "(") {
+        prepareSquareRootforCalc();
+        newArray.length += 1;
+      }
+    }
+
+    preparePercentageforCalc();
+    prepareNegativesforCalc();
+
+    prepareforCalc.push(joinArrays[0]);
+    joinArrays.splice(0, 1);
+    console.log(`Next Item: ${joinArrays[0]}`);
+  }
+  console.log(`prepare for calc: ${prepareforCalc}`);
+  newArray.length = 0;
 }
 
 const useCalculator = function () {

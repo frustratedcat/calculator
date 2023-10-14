@@ -175,6 +175,7 @@ const calculateEval = function () {
             joinDecimals();
             prepareItemsForCalc();
             finalPreparationForCalc();
+            makeCalculation();
             console.log(joinArrays);
           } catch (error) {
             console.error(error);
@@ -648,7 +649,6 @@ function preparePercentageforCalc() {
         if (
           typeof joinArrays[i + 1] === "number" ||
           joinArrays[i + 1] === "(" ||
-          joinArrays[i + 1] === ")" ||
           joinArrays[i + 1] === "SqRt"
         ) {
           joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
@@ -678,7 +678,19 @@ function prepareNegativesforCalc() {
       if (joinArrays[i] === "-") {
         if (typeof joinArrays[i + 1] !== "number") {
           joinArrays.splice(joinArrays[i], 1, -1, "x");
+          break;
         }
+      }
+    }
+  }
+}
+
+function prepareNumbersforCalc() {
+  for (let i = 0; i < joinArrays.length; i++) {
+    if (typeof joinArrays[i] === "number") {
+      if (joinArrays[i + 1] === "SqRt") {
+        joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
+        break;
       }
     }
   }
@@ -715,6 +727,13 @@ function prepareItemsForCalc() {
       }
     }
 
+    if (typeof joinArrays[0] === "number") {
+      if (joinArrays[1] === "SqRt") {
+        prepareNumbersforCalc();
+        newArray.length += 1;
+      }
+    }
+
     if (joinArrays[0] === "SqRt") {
       if (typeof joinArrays[1] === "number") {
         prepareSquareRootforCalc();
@@ -732,7 +751,12 @@ function prepareItemsForCalc() {
       }
     }
 
-    preparePercentageforCalc();
+    if (joinArrays[0] === "%") {
+      if (joinArrays[1] !== undefined) {
+        preparePercentageforCalc();
+        newArray.length += 1;
+      }
+    }
 
     prepareForCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);
@@ -755,6 +779,15 @@ function finalPreparationForCalc() {
     }
   }
   console.log(prepareForCalc);
+}
+
+function makeCalculation() {
+  let calcString = 0;
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    calcString += prepareForCalc[i];
+  }
+  console.log(calcString);
+  console.log(typeof calcString);
 }
 
 const useCalculator = function () {

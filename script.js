@@ -53,6 +53,7 @@ const joinedItems = [];
 const joinArrays = [];
 const sortedArrayForCalc = [];
 const prepareForCalc = [];
+let calcString;
 
 const chooseDarkLightMode = function () {
   darkLightModeBtn.addEventListener("click", (e) => {
@@ -773,21 +774,170 @@ function finalPreparationForCalc() {
     } else if (prepareForCalc[i] === "^") {
       prepareForCalc[i] = "**";
     } else if (prepareForCalc[i] === "%") {
-      prepareForCalc[i] = "/100";
+      prepareForCalc[i] = "/";
+      prepareForCalc[i + 1] = 100;
     } else if (prepareForCalc[i] === "x") {
       prepareForCalc[i] = "*";
+    } else if (prepareForCalc[i] === undefined) {
+      prepareForCalc.splice(prepareForCalc.indexOf(prepareForCalc[i]), 1);
     }
   }
   console.log(prepareForCalc);
 }
 
-function makeCalculation() {
-  let calcString = 0;
+function additionCalc() {
   for (let i = 0; i < prepareForCalc.length; i++) {
-    calcString += prepareForCalc[i];
+    if (prepareForCalc[i] === "+") {
+      if (
+        typeof prepareForCalc[i - 1] === "number" &&
+        typeof prepareForCalc[i + 1] === "number"
+      ) {
+        calcString = prepareForCalc[i - 1] + prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          3,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
   }
-  console.log(calcString);
-  console.log(typeof calcString);
+}
+
+function subtractionCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "-") {
+      if (
+        typeof prepareForCalc[i - 1] === "number" &&
+        typeof prepareForCalc[i + 1] === "number"
+      ) {
+        calcString = prepareForCalc[i - 1] - prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          3,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
+  }
+}
+
+function multiplicationCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "*") {
+      if (
+        typeof prepareForCalc[i - 1] === "number" &&
+        typeof prepareForCalc[i + 1] === "number"
+      ) {
+        calcString = prepareForCalc[i - 1] * prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          3,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
+  }
+}
+
+function divisionCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "/") {
+      if (
+        typeof prepareForCalc[i - 1] === "number" &&
+        typeof prepareForCalc[i + 1] === "number"
+      ) {
+        calcString = prepareForCalc[i - 1] / prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          3,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
+  }
+}
+
+function exponentiationCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "**") {
+      if (
+        typeof prepareForCalc[i - 1] === "number" &&
+        typeof prepareForCalc[i + 1] === "number"
+      ) {
+        calcString = prepareForCalc[i - 1] ** prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          3,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
+  }
+}
+
+function squareRootCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "Math.sqrt") {
+      if (typeof prepareForCalc[i + 1] === "number") {
+        calcString = Math.sqrt(prepareForCalc[i + 1]);
+        console.log(calcString);
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i]),
+          2,
+          calcString
+        );
+        console.log(prepareForCalc);
+      }
+    }
+  }
+}
+
+function parenthesisCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "(") {
+      if (prepareForCalc[i + 2] === ")") {
+        prepareForCalc.splice(prepareForCalc.indexOf(prepareForCalc[i + 2]), 1);
+        prepareForCalc.splice(prepareForCalc.indexOf(prepareForCalc[i]), 1);
+      }
+    }
+    console.log(prepareForCalc);
+  }
+}
+
+function makeCalculation() {
+  while (prepareForCalc.length > 1) {
+    for (let i = 0; i < prepareForCalc.length; i++) {
+      console.log(`Item loop number: ${i + 1}`);
+      console.log(`Item: ${prepareForCalc[i]}`);
+
+      if (prepareForCalc[i] === "(") {
+        parenthesisCalc();
+      } else if (prepareForCalc[i] === "Math.sqrt") {
+        //need to handle parenthesis first
+        squareRootCalc();
+      } else if (prepareForCalc[i] === "**") {
+        exponentiationCalc();
+      } else if (prepareForCalc[i] === "*") {
+        multiplicationCalc();
+      } else if (prepareForCalc[i] === "/") {
+        divisionCalc();
+      } else if (prepareForCalc[i] === "+") {
+        additionCalc();
+      } else if (prepareForCalc[i] === "-") {
+        subtractionCalc();
+      }
+    }
+  }
 }
 
 const useCalculator = function () {

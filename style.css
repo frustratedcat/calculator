@@ -26,7 +26,7 @@ Btn Border: #495057
 }
 
 .header {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .header-h1 {
@@ -41,7 +41,6 @@ Btn Border: #495057
   align-items: center;
   padding: 20px;
   width: 350px;
-  margin: auto;
 }
 
 .show-evaluation-section {
@@ -92,7 +91,7 @@ Btn Border: #495057
 }
 
 .footer {
-  margin: auto;
+  margin: auto 0 20px 0;
   font-size: 16px;
 }
 

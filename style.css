@@ -27,6 +27,8 @@ Btn Border: #495057
 
 .header {
   margin: 20px 0;
+  width: 350px;
+  text-align: center;
 }
 
 .header-h1 {

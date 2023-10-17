@@ -29,11 +29,17 @@ Btn Border: #495057
   margin: 20px 0;
   width: 350px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-h1 {
   font-size: 40px;
   font-weight: 700;
+}
+
+.cat-paw-icon {
 }
 
 .main-section {

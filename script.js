@@ -625,23 +625,6 @@ function joinDecimals() {
   }
 }
 
-function preparePercentageforCalc() {
-  if (joinArrays.includes("%")) {
-    for (let i = 0; i < joinArrays.length; i++) {
-      if (joinArrays[i] === "%") {
-        if (
-          typeof joinArrays[i + 1] === "number" ||
-          joinArrays[i + 1] === "(" ||
-          joinArrays[i + 1] === "SqRt"
-        ) {
-          joinArrays.splice(joinArrays.indexOf(joinArrays[i + 1]), 0, "x");
-          break;
-        }
-      }
-    }
-  }
-}
-
 function prepareParenthesisforCalc() {
   if (joinArrays.includes(")")) {
     for (let i = 0; i < joinArrays.length; i++) {
@@ -704,13 +687,6 @@ function prepareItemsForCalc() {
       }
     }
 
-    if (joinArrays[0] === "%") {
-      if (joinArrays[1] !== undefined) {
-        preparePercentageforCalc();
-        newArray.length += 1;
-      }
-    }
-
     prepareForCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);
     console.log(`Next Item: ${joinArrays[0]}`);
@@ -731,9 +707,6 @@ function finalPreparationForCalc() {
       prepareForCalc[i] = "Math.sqrt";
     } else if (prepareForCalc[i] === "^") {
       prepareForCalc[i] = "**";
-    } else if (prepareForCalc[i] === "%") {
-      prepareForCalc[i] = "/";
-      prepareForCalc[i + 1] = 100;
     } else if (prepareForCalc[i] === "x") {
       prepareForCalc[i] = "*";
     } else if (prepareForCalc[i] === undefined) {
@@ -823,6 +796,40 @@ function divisionCalc() {
   }
 }
 
+function percentageCalc() {
+  for (let i = 0; i < prepareForCalc.length; i++) {
+    if (prepareForCalc[i] === "%") {
+      if (
+        prepareForCalc[i + 1] !== undefined &&
+        prepareForCalc[i + 1] !== "**" &&
+        prepareForCalc[i + 1] !== "*" &&
+        prepareForCalc[i + 1] !== "/" &&
+        prepareForCalc[i + 1] !== "%" &&
+        prepareForCalc[i + 1] !== "+" &&
+        prepareForCalc[i + 1] !== "-"
+      ) {
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i + 1]),
+          0,
+          "*"
+        );
+      }
+      if (typeof prepareForCalc[i - 1] === "number") {
+        console.log("Running for percentage");
+        calcString = prepareForCalc[i - 1] / 100;
+        prepareForCalc.splice(
+          prepareForCalc.indexOf(prepareForCalc[i - 1]),
+          2,
+          calcString
+        );
+      } else if (typeof prepareForCalc[i - 1] !== "number") {
+        continue;
+      }
+    }
+    console.log(prepareForCalc);
+  }
+}
+
 function exponentiationCalc() {
   for (let i = 0; i < prepareForCalc.length; i++) {
     if (prepareForCalc[i] === "**") {
@@ -870,6 +877,7 @@ function orderOfOperations() {
     let exponentiationIndex = prepareForCalc.indexOf("**");
     let multiplicationIndex = prepareForCalc.indexOf("*");
     let divisionIndex = prepareForCalc.indexOf("/");
+    let percentageIndex = prepareForCalc.indexOf("%");
     let additionIndex = prepareForCalc.indexOf("+");
     let subtractionIndex = prepareForCalc.indexOf("-");
 
@@ -877,6 +885,7 @@ function orderOfOperations() {
     exponentiationCalc();
     multiplicationCalc();
     divisionCalc();
+    percentageCalc();
     additionCalc();
     subtractionCalc();
 

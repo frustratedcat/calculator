@@ -314,7 +314,7 @@ function afterExponentCheck() {
 
 function percentageCheck() {
   beforePercentageCheck();
-  afterPercentageCheck();
+  // afterPercentageCheck();
 }
 
 function beforePercentageCheck() {
@@ -324,7 +324,7 @@ function beforePercentageCheck() {
       else if (calculation[i - 1] === "(") throw "Error";
       else if (calculation[i - 1] === "SqRt") throw "Error";
       else if (calculation[i - 1] === "^") throw "Error";
-      else if (calculation[i - 1] === "%") throw "Error";
+      // else if (calculation[i - 1] === "%") throw "Error";
       else if (calculation[i - 1] === "/") throw "Error";
       else if (calculation[i - 1] === "x") throw "Error";
       else if (calculation[i - 1] === "-") throw "Error";
@@ -334,13 +334,13 @@ function beforePercentageCheck() {
   }
 }
 
-function afterPercentageCheck() {
-  for (let i = 0; i < calculation.length; i++) {
-    if (calculation[i] === "%") {
-      if (calculation[i + 1] === "%") throw "Error";
-    }
-  }
-}
+// function afterPercentageCheck() {
+//   for (let i = 0; i < calculation.length; i++) {
+//     if (calculation[i] === "%") {
+//       // if (calculation[i + 1] === "%") throw "Error";
+//     }
+//   }
+// }
 
 function divisionCheck() {
   beforeDivisionCheck();
@@ -725,15 +725,11 @@ function additionCalc() {
       ) {
         console.log("Running for addition");
         calcString = prepareForCalc[i - 1] + prepareForCalc[i + 1];
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i - 1]),
-          3,
-          calcString
-        );
+        prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function subtractionCalc() {
@@ -745,35 +741,44 @@ function subtractionCalc() {
       ) {
         console.log("Running for subtraction");
         calcString = prepareForCalc[i - 1] - prepareForCalc[i + 1];
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i - 1]),
-          3,
-          calcString
-        );
+        prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function multiplicationCalc() {
   for (let i = 0; i < prepareForCalc.length; i++) {
+    console.log(prepareForCalc[i]);
+    console.log(prepareForCalc.indexOf(prepareForCalc[i]));
+    console.log(prepareForCalc[2]);
     if (prepareForCalc[i] === "*") {
       if (
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
         console.log("Running for multiplication");
-        calcString = prepareForCalc[i - 1] * prepareForCalc[i + 1];
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i - 1]),
-          3,
-          calcString
+        console.log(
+          `Index before: ${
+            prepareForCalc[i - 1]
+          }, Index number: ${prepareForCalc.indexOf(
+            prepareForCalc[i - 1]
+          )}\nIndex: ${
+            prepareForCalc[i]
+          }, Index number: ${prepareForCalc.indexOf(
+            prepareForCalc[i]
+          )}\nIndex after: ${
+            prepareForCalc[i + 1]
+          }, Index number: ${prepareForCalc.indexOf(prepareForCalc[i + 1])}`
         );
+        calcString = prepareForCalc[i - 1] * prepareForCalc[i + 1];
+        console.log(calcString);
+        prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function divisionCalc() {
@@ -785,15 +790,11 @@ function divisionCalc() {
       ) {
         console.log("Running for division");
         calcString = prepareForCalc[i - 1] / prepareForCalc[i + 1];
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i - 1]),
-          3,
-          calcString
-        );
+        prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function percentageCalc() {
@@ -826,8 +827,8 @@ function percentageCalc() {
         continue;
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function exponentiationCalc() {
@@ -839,15 +840,11 @@ function exponentiationCalc() {
       ) {
         console.log("Running for exponentiation");
         calcString = prepareForCalc[i - 1] ** prepareForCalc[i + 1];
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i - 1]),
-          3,
-          calcString
-        );
+        prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function squareRootCalc() {
@@ -856,15 +853,11 @@ function squareRootCalc() {
       if (typeof prepareForCalc[i + 1] === "number") {
         console.log("Running for square root");
         calcString = Math.sqrt(prepareForCalc[i + 1]);
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i]),
-          2,
-          calcString
-        );
+        prepareForCalc.splice(i, 2, calcString);
       }
     }
-    console.log(prepareForCalc);
   }
+  console.log(prepareForCalc);
 }
 
 function parenthesisCalc() {}
@@ -881,16 +874,27 @@ function orderOfOperations() {
     let additionIndex = prepareForCalc.indexOf("+");
     let subtractionIndex = prepareForCalc.indexOf("-");
 
-    squareRootCalc();
-    exponentiationCalc();
-    multiplicationCalc();
-    divisionCalc();
-    percentageCalc();
-    additionCalc();
-    subtractionCalc();
-
-    console.log(prepareForCalc);
+    if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
+      console.log("No Parenthesis");
+      squareRootCalc();
+      exponentiationCalc();
+      multiplicationCalc();
+      divisionCalc();
+      percentageCalc();
+      additionCalc();
+      subtractionCalc();
+    } else {
+      if (squareRootIndex !== -1) {
+        if (
+          openingParenthesisIndex < squareRootIndex &&
+          closingParenthesisIndex > squareRootIndex
+        ) {
+          squareRootCalc();
+        }
+      }
+    }
   }
+  console.log(prepareForCalc);
 }
 
 const useCalculator = function () {

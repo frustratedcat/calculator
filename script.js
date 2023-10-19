@@ -505,10 +505,10 @@ function getSplicedItems() {
 function getSplicedItemsWithString() {
   for (let i = 0; i < calculation.length; i++) {
     if (typeof calculation[i] !== "number") {
-      if (calculation.indexOf(calculation[i]) !== 0) {
+      if (i !== 0) {
         splicedItems.push(calculation.splice(0, i));
         break;
-      } else if (calculation.indexOf(calculation[i]) === 0) {
+      } else if (i === 0) {
         splicedItems.push(calculation.splice(0, 1));
         break;
       }
@@ -518,7 +518,7 @@ function getSplicedItemsWithString() {
 
 function getSplicedItemsWithoutString() {
   for (let i = 0; i < calculation.length; i++) {
-    splicedItems.push(calculation.splice(0, calculation.slice(-1)[0]));
+    splicedItems.push(calculation.splice(i, calculation.length));
   }
 }
 
@@ -806,88 +806,88 @@ function parenthesisCalc() {
 }
 
 function orderOfOperations() {
-  while (prepareForCalc.length > 1) {
-    let openingParenthesisIndex = prepareForCalc.indexOf("(");
-    let closingParenthesisIndex = prepareForCalc.indexOf(")");
-    let squareRootIndex = prepareForCalc.indexOf("Math.sqrt");
-    let exponentiationIndex = prepareForCalc.indexOf("**");
-    let multiplicationIndex = prepareForCalc.indexOf("*");
-    let divisionIndex = prepareForCalc.indexOf("/");
-    let percentageIndex = prepareForCalc.indexOf("%");
-    let additionIndex = prepareForCalc.indexOf("+");
-    let subtractionIndex = prepareForCalc.indexOf("-");
+  // while (prepareForCalc.length > 1) {
+  let openingParenthesisIndex = prepareForCalc.indexOf("(");
+  let closingParenthesisIndex = prepareForCalc.indexOf(")");
+  let squareRootIndex = prepareForCalc.indexOf("Math.sqrt");
+  let exponentiationIndex = prepareForCalc.indexOf("**");
+  let multiplicationIndex = prepareForCalc.indexOf("*");
+  let divisionIndex = prepareForCalc.indexOf("/");
+  let percentageIndex = prepareForCalc.indexOf("%");
+  let additionIndex = prepareForCalc.indexOf("+");
+  let subtractionIndex = prepareForCalc.indexOf("-");
 
-    if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
-      if (squareRootIndex < exponentiationIndex) {
-        squareRootCalc();
-        exponentiationCalc();
-      } else if (exponentiationIndex < squareRootIndex) {
-        exponentiationCalc();
-        squareRootCalc();
-      }
-      if (multiplicationIndex < divisionIndex) {
-        multiplicationCalc();
-        divisionCalc();
-      } else if (multiplicationIndex < percentageIndex) {
-        multiplicationCalc();
-        percentageCalc();
-      } else if (divisionIndex < multiplicationIndex) {
-        divisionCalc();
-        multiplicationCalc();
-      } else if (divisionIndex < percentageIndex) {
-        divisionCalc();
-        percentageCalc();
-      } else if (percentageIndex < multiplicationIndex) {
-        percentageCalc();
-        multiplicationCalc();
-      } else if (percentageIndex < divisionIndex) {
-        percentageCalc();
-        divisionCalc();
-      }
-      if (additionIndex < subtractionIndex) {
-        additionCalc();
-        subtractionCalc();
-      } else if (subtractionIndex < additionIndex) {
-        subtractionCalc();
-        additionCalc();
-      }
-    } else {
-      parenthesisCalc();
-      if (squareRootIndex < exponentiationIndex) {
-        squareRootCalc();
-        exponentiationCalc();
-      } else if (exponentiationIndex < squareRootIndex) {
-        exponentiationCalc();
-        squareRootCalc();
-      }
-      if (multiplicationIndex < divisionIndex) {
-        multiplicationCalc();
-        divisionCalc();
-      } else if (multiplicationIndex < percentageIndex) {
-        multiplicationCalc();
-        percentageCalc();
-      } else if (divisionIndex < multiplicationIndex) {
-        divisionCalc();
-        multiplicationCalc();
-      } else if (divisionIndex < percentageIndex) {
-        divisionCalc();
-        percentageCalc();
-      } else if (percentageIndex < multiplicationIndex) {
-        percentageCalc();
-        multiplicationCalc();
-      } else if (percentageIndex < divisionIndex) {
-        percentageCalc();
-        divisionCalc();
-      }
-      if (additionIndex < subtractionIndex) {
-        additionCalc();
-        subtractionCalc();
-      } else if (subtractionIndex < additionIndex) {
-        subtractionCalc();
-        additionCalc();
-      }
+  if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
+    if (squareRootIndex < exponentiationIndex) {
+      squareRootCalc();
+      exponentiationCalc();
+    } else if (exponentiationIndex < squareRootIndex) {
+      exponentiationCalc();
+      squareRootCalc();
+    }
+    if (multiplicationIndex < divisionIndex) {
+      multiplicationCalc();
+      divisionCalc();
+    } else if (multiplicationIndex < percentageIndex) {
+      multiplicationCalc();
+      percentageCalc();
+    } else if (divisionIndex < multiplicationIndex) {
+      divisionCalc();
+      multiplicationCalc();
+    } else if (divisionIndex < percentageIndex) {
+      divisionCalc();
+      percentageCalc();
+    } else if (percentageIndex < multiplicationIndex) {
+      percentageCalc();
+      multiplicationCalc();
+    } else if (percentageIndex < divisionIndex) {
+      percentageCalc();
+      divisionCalc();
+    }
+    if (additionIndex < subtractionIndex) {
+      additionCalc();
+      subtractionCalc();
+    } else if (subtractionIndex < additionIndex) {
+      subtractionCalc();
+      additionCalc();
+    }
+  } else {
+    parenthesisCalc();
+    if (squareRootIndex < exponentiationIndex) {
+      squareRootCalc();
+      exponentiationCalc();
+    } else if (exponentiationIndex < squareRootIndex) {
+      exponentiationCalc();
+      squareRootCalc();
+    }
+    if (multiplicationIndex < divisionIndex) {
+      multiplicationCalc();
+      divisionCalc();
+    } else if (multiplicationIndex < percentageIndex) {
+      multiplicationCalc();
+      percentageCalc();
+    } else if (divisionIndex < multiplicationIndex) {
+      divisionCalc();
+      multiplicationCalc();
+    } else if (divisionIndex < percentageIndex) {
+      divisionCalc();
+      percentageCalc();
+    } else if (percentageIndex < multiplicationIndex) {
+      percentageCalc();
+      multiplicationCalc();
+    } else if (percentageIndex < divisionIndex) {
+      percentageCalc();
+      divisionCalc();
+    }
+    if (additionIndex < subtractionIndex) {
+      additionCalc();
+      subtractionCalc();
+    } else if (subtractionIndex < additionIndex) {
+      subtractionCalc();
+      additionCalc();
     }
   }
+  // }
   showEval.textContent = prepareForCalc;
 }
 

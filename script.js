@@ -178,6 +178,7 @@ const calculateEval = function () {
             fixPreceedingNegatives();
             finalPreparationForCalc();
             orderOfOperations();
+            formatFinalResult();
           } catch (error) {
             showEval.textContent = error;
           } finally {
@@ -888,7 +889,17 @@ function orderOfOperations() {
       }
     }
   }
-  showEval.textContent = prepareForCalc;
+}
+
+function formatFinalResult() {
+  let finalCalcResult;
+  if (Number.isInteger(prepareForCalc[0]) === false) {
+    finalCalcResult =
+      Math.round((prepareForCalc[0] + Number.EPSILON) * 100) / 100;
+  } else {
+    finalCalcResult = prepareForCalc[0];
+  }
+  showEval.textContent = finalCalcResult;
 }
 
 const useCalculator = function () {

@@ -506,9 +506,7 @@ function getSplicedItemsWithString() {
   for (let i = 0; i < calculation.length; i++) {
     if (typeof calculation[i] !== "number") {
       if (calculation.indexOf(calculation[i]) !== 0) {
-        splicedItems.push(
-          calculation.splice(0, calculation.indexOf(calculation[i]))
-        );
+        splicedItems.push(calculation.splice(0, i));
         break;
       } else if (calculation.indexOf(calculation[i]) === 0) {
         splicedItems.push(calculation.splice(0, 1));

@@ -178,10 +178,8 @@ const calculateEval = function () {
             fixPreceedingNegatives();
             finalPreparationForCalc();
             orderOfOperations();
-            console.log(joinArrays);
           } catch (error) {
-            console.error(error);
-            console.error(error.message);
+            showEval.textContent = error;
           } finally {
             calculation.length = 0;
             parenthesisCheckArray.length = 0;
@@ -190,7 +188,6 @@ const calculateEval = function () {
             joinedItems.length = 0;
             joinArrays.length = 0;
             prepareForCalc.length = 0;
-            console.log("done");
           }
         }
       }
@@ -314,7 +311,6 @@ function afterExponentCheck() {
 
 function percentageCheck() {
   beforePercentageCheck();
-  // afterPercentageCheck();
 }
 
 function beforePercentageCheck() {
@@ -324,7 +320,6 @@ function beforePercentageCheck() {
       else if (calculation[i - 1] === "(") throw "Error";
       else if (calculation[i - 1] === "SqRt") throw "Error";
       else if (calculation[i - 1] === "^") throw "Error";
-      // else if (calculation[i - 1] === "%") throw "Error";
       else if (calculation[i - 1] === "/") throw "Error";
       else if (calculation[i - 1] === "x") throw "Error";
       else if (calculation[i - 1] === "-") throw "Error";
@@ -333,14 +328,6 @@ function beforePercentageCheck() {
     }
   }
 }
-
-// function afterPercentageCheck() {
-//   for (let i = 0; i < calculation.length; i++) {
-//     if (calculation[i] === "%") {
-//       // if (calculation[i + 1] === "%") throw "Error";
-//     }
-//   }
-// }
 
 function divisionCheck() {
   beforeDivisionCheck();
@@ -651,24 +638,18 @@ function prepareItemsForCalc() {
     newArray.push(joinArrays[i]);
   }
   for (let i = 0; i < newArray.length; i++) {
-    console.log(`Loop Number: ${i + 1}`);
-    console.log(`Item Up: ${joinArrays[0]}`);
-
     if (joinArrays[0] === ")") {
       let getIndexOpeningParenthesis = joinArrays.indexOf("(");
       let getIndexClosingParenthesis = joinArrays.indexOf(joinArrays[0]);
       let getSquareRootIndex = joinArrays.indexOf("SqRt");
-      console.log(joinArrays);
       if (getIndexOpeningParenthesis > getIndexClosingParenthesis) {
         prepareParenthesisforCalc();
-        console.log(joinArrays);
         newArray.length += 1;
       } else if (
         getSquareRootIndex > getIndexClosingParenthesis &&
         joinArrays[1] === "SqRt"
       ) {
         prepareParenthesisforCalc();
-        console.log(joinArrays);
         newArray.length += 1;
       }
     }
@@ -682,9 +663,7 @@ function prepareItemsForCalc() {
 
     prepareForCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);
-    console.log(`Next Item: ${joinArrays[0]}`);
   }
-  console.log(`prepare for calc: ${prepareForCalc}`);
   newArray.length = 0;
 }
 
@@ -706,7 +685,6 @@ function finalPreparationForCalc() {
       prepareForCalc.splice(i, 1);
     }
   }
-  console.log(prepareForCalc);
 }
 
 function additionCalc() {
@@ -716,13 +694,11 @@ function additionCalc() {
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
-        console.log("Running for addition");
         calcString = prepareForCalc[i - 1] + prepareForCalc[i + 1];
         prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function subtractionCalc() {
@@ -732,13 +708,11 @@ function subtractionCalc() {
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
-        console.log("Running for subtraction");
         calcString = prepareForCalc[i - 1] - prepareForCalc[i + 1];
         prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function multiplicationCalc() {
@@ -748,14 +722,11 @@ function multiplicationCalc() {
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
-        console.log("Running for multiplication");
         calcString = prepareForCalc[i - 1] * prepareForCalc[i + 1];
-        console.log(calcString);
         prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function divisionCalc() {
@@ -765,13 +736,11 @@ function divisionCalc() {
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
-        console.log("Running for division");
         calcString = prepareForCalc[i - 1] / prepareForCalc[i + 1];
         prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function percentageCalc() {
@@ -793,7 +762,6 @@ function percentageCalc() {
         );
       }
       if (typeof prepareForCalc[i - 1] === "number") {
-        console.log("Running for percentage");
         calcString = prepareForCalc[i - 1] / 100;
         prepareForCalc.splice(i - 1, 2, calcString);
       } else if (typeof prepareForCalc[i - 1] !== "number") {
@@ -801,7 +769,6 @@ function percentageCalc() {
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function exponentiationCalc() {
@@ -811,26 +778,22 @@ function exponentiationCalc() {
         typeof prepareForCalc[i - 1] === "number" &&
         typeof prepareForCalc[i + 1] === "number"
       ) {
-        console.log("Running for exponentiation");
         calcString = prepareForCalc[i - 1] ** prepareForCalc[i + 1];
         prepareForCalc.splice(i - 1, 3, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function squareRootCalc() {
   for (let i = 0; i < prepareForCalc.length; i++) {
     if (prepareForCalc[i] === "Math.sqrt") {
       if (typeof prepareForCalc[i + 1] === "number") {
-        console.log("Running for square root");
         calcString = Math.sqrt(prepareForCalc[i + 1]);
         prepareForCalc.splice(i, 2, calcString);
       }
     }
   }
-  console.log(prepareForCalc);
 }
 
 function parenthesisCalc() {
@@ -857,7 +820,6 @@ function orderOfOperations() {
     let subtractionIndex = prepareForCalc.indexOf("-");
 
     if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
-      console.log("No Parenthesis");
       if (squareRootIndex < exponentiationIndex) {
         squareRootCalc();
         exponentiationCalc();
@@ -892,7 +854,6 @@ function orderOfOperations() {
         additionCalc();
       }
     } else {
-      console.log("Parenthesis");
       parenthesisCalc();
       if (squareRootIndex < exponentiationIndex) {
         squareRootCalc();
@@ -929,7 +890,6 @@ function orderOfOperations() {
       }
     }
   }
-  console.log(prepareForCalc);
   showEval.textContent = prepareForCalc;
 }
 

@@ -68,6 +68,11 @@ const chooseDarkLightMode = function () {
         darkLightBtn[i].classList.toggle("dark-mode");
       }
     }
+    if (e.target.classList[3] === "dark-mode") {
+      darkLightModeBtn.textContent = "Light";
+    } else {
+      darkLightModeBtn.textContent = "Dark";
+    }
   });
 };
 

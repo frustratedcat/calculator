@@ -69,9 +69,9 @@ const chooseDarkLightMode = function () {
       }
     }
     if (e.target.classList[3] === "dark-mode") {
-      darkLightModeBtn.textContent = "Light";
+      darkLightModeBtn.innerHTML = '<i class="fa-regular fa-sun"></i>';
     } else {
-      darkLightModeBtn.textContent = "Dark";
+      darkLightModeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
     }
   });
 };

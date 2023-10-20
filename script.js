@@ -499,14 +499,15 @@ function afterDecimalCheck() {
 function getSplicedItems() {
   if (calculation.length === 1) {
     singleSplicedItem();
-  }
-  let strValue = calculation.findIndex((value) => {
-    return typeof value === "string";
-  });
-  if (strValue !== -1) {
-    getSplicedItemsWithString();
-  } else {
-    getSplicedItemsWithoutString();
+  } else if (calculation.length > 1) {
+    let strValue = calculation.findIndex((value) => {
+      return typeof value === "string";
+    });
+    if (strValue !== -1) {
+      getSplicedItemsWithString();
+    } else {
+      getSplicedItemsWithoutString();
+    }
   }
 }
 
@@ -527,6 +528,7 @@ function getSplicedItemsWithString() {
 function getSplicedItemsWithoutString() {
   for (let i = 0; i < calculation.length; i++) {
     splicedItems.push(calculation.splice(i, calculation.length));
+    break;
   }
 }
 
@@ -585,6 +587,14 @@ function convertNumbers() {
 
 function joinDecimals() {
   if (joinArrays.includes(".")) {
+    if (joinArrays[0] === ".") {
+      for (let i = 0; i < joinArrays.length; i++) {
+        if (joinArrays[i] === ".") {
+          joinArrays.splice(i, 2, Number("0." + joinArrays[i + 1]));
+          break;
+        }
+      }
+    }
     for (let i = 0; i < joinArrays.length; i++) {
       if (joinArrays[i] === ".") {
         if (typeof joinArrays[i - 1] !== "number") {
@@ -600,7 +610,6 @@ function joinDecimals() {
             joinArrays[i - 1] === "+"
           ) {
             joinArrays.splice(i, 2, Number("0." + joinArrays[i + 1]));
-            break;
           }
         } else if (typeof joinArrays[i - 1] === "number") {
           joinArrays.splice(

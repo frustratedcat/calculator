@@ -68,10 +68,12 @@ const chooseDarkLightMode = function () {
         darkLightBtn[i].classList.toggle("dark-mode");
       }
     }
-    if (e.target.classList[3] === "dark-mode") {
-      darkLightModeBtn.innerHTML = '<i class="fa-regular fa-sun"></i>';
+    if (e.target.classList[4] === "dark-mode") {
+      darkLightModeBtn.classList.remove("light-mode-btn");
+      darkLightModeBtn.classList.add("dark-mode-btn");
     } else {
-      darkLightModeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      darkLightModeBtn.classList.remove("dark-mode-btn");
+      darkLightModeBtn.classList.add("light-mode-btn");
     }
   });
 };

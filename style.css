@@ -72,6 +72,25 @@ Btn Border: #495057
   font-weight: 500;
 }
 
+/* put psuedo classes here */
+.dark-light-mode-btn::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.light-mode-btn::before {
+  content: "\f186";
+  font-weight: 900;
+}
+
+.dark-mode-btn::before {
+  content: "\f185";
+  font-weight: 400;
+}
+
 .btn-section {
   width: 300px;
   height: auto;

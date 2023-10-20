@@ -1,15 +1,3 @@
-/* 
-Light Color: #f8f9fa
-Dark Color: #495057
-
-Calc Light: #e7f5ff
-Calc Dark: ##212529
-
-Btn Border: #495057
-
-
-*/
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -72,7 +60,6 @@ Btn Border: #495057
   font-weight: 500;
 }
 
-/* put psuedo classes here */
 .dark-light-mode-btn::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;

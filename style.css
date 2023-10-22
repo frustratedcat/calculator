@@ -30,7 +30,15 @@
   font-weight: 700;
 }
 
-.fa-paw {
+.fa-paw::before {
+  content: "\f1b0";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 26px;
   margin: 0 10px;
 }

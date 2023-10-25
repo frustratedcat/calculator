@@ -763,6 +763,7 @@ function percentageCalc() {
     if (prepareForCalc[i] === "%") {
       if (
         prepareForCalc[i + 1] !== undefined &&
+        prepareForCalc[i + 1] !== ")" &&
         prepareForCalc[i + 1] !== "**" &&
         prepareForCalc[i + 1] !== "*" &&
         prepareForCalc[i + 1] !== "/" &&

@@ -809,6 +809,7 @@ function squareRootCalc() {
 function parenthesisCalc() {
   for (let i = 0; i < prepareForCalc.length; i++) {
     if (prepareForCalc[i] === "(" && prepareForCalc[i + 2] === ")") {
+      console.log("removing parenthesis");
       prepareForCalc.splice(i + 2, 1);
       prepareForCalc.splice(i, 1);
     } else {
@@ -830,73 +831,341 @@ function orderOfOperations() {
     let subtractionIndex = prepareForCalc.indexOf("-");
 
     if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
-      if (squareRootIndex < exponentiationIndex) {
-        squareRootCalc();
+      if (squareRootIndex !== -1 && exponentiationIndex !== -1) {
+        if (squareRootIndex < exponentiationIndex) {
+          console.log(prepareForCalc);
+          squareRootCalc();
+          console.log(prepareForCalc);
+          exponentiationCalc();
+          console.log(prepareForCalc);
+        } else if (exponentiationIndex < squareRootIndex) {
+          console.log(prepareForCalc);
+          exponentiationCalc();
+          console.log(prepareForCalc);
+          squareRootCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (squareRootIndex === -1 && exponentiationIndex !== -1) {
+        console.log(prepareForCalc);
         exponentiationCalc();
-      } else if (exponentiationIndex < squareRootIndex) {
-        exponentiationCalc();
+      } else if (squareRootIndex !== -1 && exponentiationIndex === -1) {
+        console.log(prepareForCalc);
         squareRootCalc();
       }
-      if (multiplicationIndex < divisionIndex) {
+
+      if (
+        multiplicationIndex !== -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex !== -1
+      ) {
+        if (multiplicationIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        } else if (multiplicationIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex !== -1
+      ) {
+        if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex === -1 &&
+        percentageIndex !== -1
+      ) {
+        if (multiplicationIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex === -1
+      ) {
+        if (multiplicationIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex === -1 &&
+        percentageIndex === -1
+      ) {
+        console.log(prepareForCalc);
         multiplicationCalc();
+        console.log(prepareForCalc);
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex === -1
+      ) {
+        console.log(prepareForCalc);
         divisionCalc();
-      } else if (multiplicationIndex < percentageIndex) {
-        multiplicationCalc();
+        console.log(prepareForCalc);
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex === -1 &&
+        percentageIndex !== -1
+      ) {
+        console.log(prepareForCalc);
         percentageCalc();
-      } else if (divisionIndex < multiplicationIndex) {
-        divisionCalc();
-        multiplicationCalc();
-      } else if (divisionIndex < percentageIndex) {
-        divisionCalc();
-        percentageCalc();
-      } else if (percentageIndex < multiplicationIndex) {
-        percentageCalc();
-        multiplicationCalc();
-      } else if (percentageIndex < divisionIndex) {
-        percentageCalc();
-        divisionCalc();
+        console.log(prepareForCalc);
       }
-      if (additionIndex < subtractionIndex) {
-        additionCalc();
+
+      if (additionIndex !== -1 && subtractionIndex !== -1) {
+        if (additionIndex < subtractionIndex) {
+          console.log(prepareForCalc);
+          additionCalc();
+          console.log(prepareForCalc);
+          subtractionCalc();
+          console.log(prepareForCalc);
+        } else if (subtractionIndex < additionIndex) {
+          console.log(prepareForCalc);
+          subtractionCalc();
+          console.log(prepareForCalc);
+          additionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (additionIndex === -1 && subtractionIndex !== -1) {
+        console.log(prepareForCalc);
         subtractionCalc();
-      } else if (subtractionIndex < additionIndex) {
-        subtractionCalc();
+        console.log(prepareForCalc);
+      } else if (additionIndex !== -1 && subtractionIndex === -1) {
+        console.log(prepareForCalc);
         additionCalc();
+        console.log(prepareForCalc);
       }
     } else {
       parenthesisCalc();
-      if (squareRootIndex < exponentiationIndex) {
-        squareRootCalc();
+      if (squareRootIndex !== -1 && exponentiationIndex !== -1) {
+        if (squareRootIndex < exponentiationIndex) {
+          console.log(prepareForCalc);
+          squareRootCalc();
+          console.log(prepareForCalc);
+          exponentiationCalc();
+          console.log(prepareForCalc);
+        } else if (exponentiationIndex < squareRootIndex) {
+          console.log(prepareForCalc);
+          exponentiationCalc();
+          console.log(prepareForCalc);
+          squareRootCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (squareRootIndex === -1 && exponentiationIndex !== -1) {
+        console.log(prepareForCalc);
         exponentiationCalc();
-      } else if (exponentiationIndex < squareRootIndex) {
-        exponentiationCalc();
+      } else if (squareRootIndex !== -1 && exponentiationIndex === -1) {
+        console.log(prepareForCalc);
         squareRootCalc();
       }
-      if (multiplicationIndex < divisionIndex) {
+
+      if (
+        multiplicationIndex !== -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex !== -1
+      ) {
+        if (multiplicationIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        } else if (multiplicationIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex !== -1
+      ) {
+        if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex === -1 &&
+        percentageIndex !== -1
+      ) {
+        if (multiplicationIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        } else if (percentageIndex < multiplicationIndex) {
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex === -1
+      ) {
+        if (multiplicationIndex < divisionIndex) {
+          console.log(prepareForCalc);
+          multiplicationCalc();
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+        } else if (divisionIndex < percentageIndex) {
+          console.log(prepareForCalc);
+          divisionCalc();
+          console.log(prepareForCalc);
+          percentageCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (
+        multiplicationIndex !== -1 &&
+        divisionIndex === -1 &&
+        percentageIndex === -1
+      ) {
+        console.log(prepareForCalc);
         multiplicationCalc();
+        console.log(prepareForCalc);
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex !== -1 &&
+        percentageIndex === -1
+      ) {
+        console.log(prepareForCalc);
         divisionCalc();
-      } else if (multiplicationIndex < percentageIndex) {
-        multiplicationCalc();
+        console.log(prepareForCalc);
+      } else if (
+        multiplicationIndex === -1 &&
+        divisionIndex === -1 &&
+        percentageIndex !== -1
+      ) {
+        console.log(prepareForCalc);
         percentageCalc();
-      } else if (divisionIndex < multiplicationIndex) {
-        divisionCalc();
-        multiplicationCalc();
-      } else if (divisionIndex < percentageIndex) {
-        divisionCalc();
-        percentageCalc();
-      } else if (percentageIndex < multiplicationIndex) {
-        percentageCalc();
-        multiplicationCalc();
-      } else if (percentageIndex < divisionIndex) {
-        percentageCalc();
-        divisionCalc();
+        console.log(prepareForCalc);
       }
-      if (additionIndex < subtractionIndex) {
-        additionCalc();
+
+      if (additionIndex !== -1 && subtractionIndex !== -1) {
+        if (additionIndex < subtractionIndex) {
+          console.log(prepareForCalc);
+          additionCalc();
+          console.log(prepareForCalc);
+          subtractionCalc();
+          console.log(prepareForCalc);
+        } else if (subtractionIndex < additionIndex) {
+          console.log(prepareForCalc);
+          subtractionCalc();
+          console.log(prepareForCalc);
+          additionCalc();
+          console.log(prepareForCalc);
+        }
+      } else if (additionIndex === -1 && subtractionIndex !== -1) {
+        console.log(prepareForCalc);
         subtractionCalc();
-      } else if (subtractionIndex < additionIndex) {
-        subtractionCalc();
+        console.log(prepareForCalc);
+      } else if (additionIndex !== -1 && subtractionIndex === -1) {
+        console.log(prepareForCalc);
         additionCalc();
+        console.log(prepareForCalc);
       }
     }
   }

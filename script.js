@@ -668,14 +668,12 @@ function prepareItemsForCalc() {
         newArray.length += 1;
       }
     }
-
     if (typeof joinArrays[0] === "number") {
       if (joinArrays[1] === "SqRt" || joinArrays[1] === "(") {
         prepareNumbersforCalc();
         newArray.length += 1;
       }
     }
-
     prepareForCalc.push(joinArrays[0]);
     joinArrays.splice(0, 1);
   }

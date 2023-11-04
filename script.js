@@ -771,11 +771,7 @@ function percentageCalc() {
         prepareForCalc[i + 1] !== "+" &&
         prepareForCalc[i + 1] !== "-"
       ) {
-        prepareForCalc.splice(
-          prepareForCalc.indexOf(prepareForCalc[i + 1]),
-          0,
-          "*"
-        );
+        prepareForCalc.splice(prepareForCalc[i + 1], 0, "*");
       }
       if (typeof prepareForCalc[i - 1] === "number") {
         calcString = prepareForCalc[i - 1] / 100;

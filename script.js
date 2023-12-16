@@ -830,6 +830,7 @@ function orderOfOperations() {
     let additionIndex = prepareForCalc.indexOf("+");
     let subtractionIndex = prepareForCalc.indexOf("-");
 
+    // there's a problem where if you have repeating symbols in a function, such as 6 + 6 * 6 * 9, it will return 378 as it runs the first 6*6 and then instead of running 36 * 9, it runs 6 + 36 first and then 42 * 9. The answer should be 330.
     if (openingParenthesisIndex === -1 && closingParenthesisIndex === -1) {
       if (squareRootIndex !== -1 && exponentiationIndex !== -1) {
         if (squareRootIndex < exponentiationIndex) {
@@ -999,6 +1000,7 @@ function orderOfOperations() {
         console.log(prepareForCalc);
       }
     } else {
+      // the way this one is working is that it is removing parenthesis after it has done every calculation that it can and so it ignores order of operations in that sense. If there is only one number in the parenthesis and nothing to calculate, it will remove the parenthsis first like it is supposed to, otherwise it removes them when all other calculations are complete.
       parenthesisCalc();
       if (squareRootIndex !== -1 && exponentiationIndex !== -1) {
         if (squareRootIndex < exponentiationIndex) {
